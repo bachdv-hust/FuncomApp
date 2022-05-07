@@ -248,7 +248,7 @@ với những khoản vay phù hợp với mọi nhu cầu. Và
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_24"
-            app:text="Nhiệm vụ" />
+            app:text="Nhiệm vụ nhận thưởng" />
 
         <LinearLayout
             android:layout_width="match_parent"
