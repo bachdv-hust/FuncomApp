@@ -3,10 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/background_btn_give_coin.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable-v24/background_btn_multichoice.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable-v24/background_btn_multichoice_disable.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable-v24/background_btn_multichoice_enable.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable-v24/background_btn_try.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable-v24/background_dialog_result_question.xml" value="0.221" />
         <entry key="app/src/main/res/drawable-v24/ic_toast_cancel.xml" value="0.2345" />
         <entry key="app/src/main/res/drawable/background.xml" value="0.2345" />
+        <entry key="app/src/main/res/drawable/background_btn_try_disable.xml" value="0.2605" />
         <entry key="app/src/main/res/drawable/ic_toast_cancel.xml" value="0.2345" />
+        <entry key="app/src/main/res/drawable/question_select.xml" value="0.2265" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3591485507246377" />
+        <entry key="app/src/main/res/layout/activity_multi_choice.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/dialogresultquestion.xml" value="0.2557291666666667" />
+        <entry key="app/src/main/res/layout/item_anwser_multi_choice.xml" value="0.3591485507246377" />
+        <entry key="app/src/main/res/layout/item_question_multi_choice.xml" value="0.3591485507246377" />
+        <entry key="app/src/main/res/layout/success_question.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/layout/view_custom_toast.xml" value="0.3591485507246377" />
       </map>
     </option>
