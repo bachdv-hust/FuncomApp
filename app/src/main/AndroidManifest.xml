@@ -23,6 +23,9 @@
         android:theme="@style/Theme.Hackathon"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.funshop.FunShopActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.persionjoined.PersonJoinedActivity"
             android:exported="false" />
         <activity

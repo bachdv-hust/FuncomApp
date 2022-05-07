@@ -81,7 +81,7 @@ class NewFeedViewHolder(private val binding: ItemNewFeedBinding) :
                 ContextCompat.getDrawable(binding.root.context, R.drawable.bg_event_ended)
         } else {
             item.timeEnd?.let { date ->
-                val dateFormat: DateFormat = SimpleDateFormat("hh:mm - dd/mm/yyyy ")
+                val dateFormat: DateFormat = SimpleDateFormat("hh:mm - dd/MM/yyyy")
                 val strDate: String = dateFormat.format(date)
                 binding.tvEndTime.text = strDate
             } ?: kotlin.run {

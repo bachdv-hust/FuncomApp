@@ -54,12 +54,14 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
             CommentActivity.startSelf(this, eventId?.toLong() ?: -1)
         }
         binding.contentBody.btnSeeMore.setOnClickListener {
-            PersonJoinedActivity.startActivity(this,eventId!!)
+            PersonJoinedActivity.startActivity(this, eventDetail)
         }
         eventId?.let { userId?.let { it1 -> eventController.getEventDetail(it, it1) } }
     }
 
+    private var eventDetail: EventDetail? = null
     override fun onEventDetailResult(eventDetail: EventDetail) {
+        this.eventDetail = eventDetail
         binding.ivEventCover.load(url = eventDetail.thumbnailUrl)
         binding.tvTitleToolbar.text = eventDetail.title
         binding.contentBody.tvDateTime.text = "${eventDetail.startDate} to ${eventDetail.endDate}"

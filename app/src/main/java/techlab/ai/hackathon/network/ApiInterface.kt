@@ -47,4 +47,7 @@ interface ApiInterface {
         @Field("event_id") eventId: Long,
         @Field("content") content: String
     ): Observable<BaseResponse<Any>>
+
+    @GET("shops")
+    fun getShopPackage(): Observable<BaseListResponse<ShopPackage>>
 }

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_13">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivUserAvatar"
             android:layout_width="@dimen/dp_19"
             android:layout_height="@dimen/dp_19"
