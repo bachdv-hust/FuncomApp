@@ -13,10 +13,9 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:fontFamily="@font/inter_regular"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp_16"
         android:layout_marginStart="@dimen/dp_5"
-        />
+        android:fontFamily="@font/inter_semi_bold"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16" />
 </LinearLayout>

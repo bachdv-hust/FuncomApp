@@ -27,5 +27,5 @@ class UserModel {
     @SerializedName("totalCoin")
     var totalCoin: Double = 0.0
 
-
+    fun nameDisplay() =firstName + " "+ lastName
 }

@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FEFCFF"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.EventDetailActivity"
+    tools:context=".ui.event_detail.EventDetailActivity"
     tools:showIn="@layout/activity_event_detail">
 
     <LinearLayout
@@ -21,23 +22,28 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvDateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/dp_5"
                 android:fontFamily="@font/inter_regular"
-                android:text="Thời gian: 07/05 - 20:00 - 10/05"
+                android:text="Thời gian: 07/05 tới 20:00 - 10/05"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_11"
                 app:drawableStartCompat="@drawable/clock_1" />
 
             <TextView
+                android:id="@+id/tvEventTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
+                android:fontFamily="@font/inter_semi_bold"
                 android:text="Tham gia sự kiện rinh quà từ Credita lên tới 1000.000 đ . Tham gia ngay!"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/sp_18" />
 
             <TextView
+                android:id="@+id/tvCreateBy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
@@ -53,10 +59,20 @@
             android:layout_marginTop="@dimen/dp_9"
             android:orientation="vertical">
 
-            <View
+            <com.liihuu.progressbar.FloatTextProgressBar
+                android:id="@+id/progressCoin"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="#3CCA98" />
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_8"
+                app:arrowPointRadius="50dp"
+                app:backgroundColor="#d8d8d8"
+                app:fillColor="#3CCA98"
+                app:maxProgress="100"
+                app:progress="50"
+                app:progressWidth="@dimen/dp_8"
+                app:rectColor="#3CCA98"
+                app:textColor="#fff"
+                app:triangleColor="#3CCA98" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -88,10 +104,11 @@
                             android:src="@drawable/ic_coin" />
 
                         <TextView
+                            android:id="@+id/tvCoinCirculating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp_8"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_semi_bold"
                             android:text="500.000"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -125,10 +142,11 @@
                             android:src="@drawable/ic_coin" />
 
                         <TextView
+                            android:id="@+id/tvCoinTotal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp_8"
-                            android:fontFamily="@font/inter_regular"
+                            android:fontFamily="@font/inter_semi_bold"
                             android:text="1.500.000"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16" />
@@ -178,11 +196,14 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tvEventDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_9"
                     android:fontFamily="@font/inter_regular"
                     android:paddingHorizontal="@dimen/dp_10"
+                    android:maxLines="3"
+                    android:ellipsize="end"
                     android:text="️🛒 Lễ đến gần nhu cầu tiêu dùng gia tăng, đừng
 quên Credita luôn sẵn sàng hỗ trợ bạn mỗi khi cần
 với những khoản vay phù hợp với mọi nhu cầu. Và
@@ -191,6 +212,7 @@ với những khoản vay phù hợp với mọi nhu cầu. Và
                     android:textSize="@dimen/sp_12" />
 
                 <TextView
+                    android:id="@+id/btnSeeMore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -198,11 +220,13 @@ với những khoản vay phù hợp với mọi nhu cầu. Và
                     android:background="@drawable/bg_grey_r6"
                     android:paddingHorizontal="@dimen/dp_8"
                     android:paddingVertical="@dimen/dp_3"
-                    android:text="Xem thêm" />
+                    android:text="Xem thêm"
+                    android:textSize="@dimen/sp_12" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <techlab.ai.hackathon.share_ui.HeaderTitleView
+            android:id="@+id/headerMission"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_24"
@@ -214,6 +238,7 @@ với những khoản vay phù hợp với mọi nhu cầu. Và
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/ctnDownload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_16"
@@ -234,9 +259,9 @@ với những khoản vay phù hợp với mọi nhu cầu. Và
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ctnSurvey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_24"
                 android:layout_marginTop="@dimen/dp_16"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -256,35 +281,77 @@ với những khoản vay phù hợp với mọi nhu cầu. Và
         </LinearLayout>
 
         <techlab.ai.hackathon.share_ui.HeaderTitleView
+            android:id="@+id/headerDonors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_24"
             app:text="Nhà tài trợ" />
 
         <LinearLayout
+            android:id="@+id/llDonors"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
             android:orientation="vertical">
 
-            <include layout="@layout/item_donors" />
-
-            <include layout="@layout/item_donors" />
         </LinearLayout>
 
+        <RelativeLayout
+            android:id="@+id/rlHeaderUserJoin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_24">
+
+            <techlab.ai.hackathon.share_ui.HeaderTitleView
+                android:id="@+id/headerUserJoin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:text="150 người đã tham gia" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_12"
+                android:text="Xem thêm" />
+        </RelativeLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_2"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_2"
+            app:cardCornerRadius="@dimen/dp_8"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:id="@+id/llUsersJoin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
         <techlab.ai.hackathon.share_ui.HeaderTitleView
+            android:id="@+id/headerLinks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_24"
             app:text="Liên kết" />
 
         <LinearLayout
+            android:id="@+id/llLinks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
             android:orientation="vertical">
 
-            <include layout="@layout/item_links" />
-
-            <include layout="@layout/item_links" />
         </LinearLayout>
     </LinearLayout>
 

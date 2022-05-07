@@ -2,8 +2,6 @@ package techlab.ai.hackathon.ui.main
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
@@ -12,13 +10,9 @@ import com.google.gson.Gson
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.cached.SharePref
 import techlab.ai.hackathon.common.load
-import techlab.ai.hackathon.common.toast.AppToast
-import techlab.ai.hackathon.common.toast.ToastStyle
-import techlab.ai.hackathon.data.model.DemoModel
 import techlab.ai.hackathon.data.model.NewFeed
 import techlab.ai.hackathon.data.model.UserModel
 import techlab.ai.hackathon.databinding.ActivityMainBinding
-import techlab.ai.hackathon.ui.EventDetailActivity
 import techlab.ai.hackathon.ui.base.BaseActivity
 import techlab.ai.hackathon.ui.login.LoginDialog
 import techlab.ai.hackathon.ui.main.adapter.NewFeedAdapter

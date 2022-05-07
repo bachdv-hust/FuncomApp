@@ -6,6 +6,7 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Parcelable
@@ -17,6 +18,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.browser.customtabs.CustomTabColorSchemeParams
+import androidx.browser.customtabs.CustomTabsIntent
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.model.GlideUrl
@@ -30,6 +33,7 @@ import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
+
 
 /**
  * @author BachDV
@@ -382,4 +386,17 @@ fun EditText.showSoftKeyboard() {
 fun EditText.hideSoftKeyboard() {
     val imm = this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(this.windowToken, 0)
+}
+
+fun String.openWebUrl(context: Context) {
+    val colorInt: Int = Color.parseColor("#3CCA98") //red
+
+    val defaultColors = CustomTabColorSchemeParams.Builder()
+        .setToolbarColor(colorInt)
+        .build()
+    val builder = CustomTabsIntent.Builder()
+    builder.setDefaultColorSchemeParams(defaultColors)
+
+    val customTabsIntent = builder.build()
+    customTabsIntent.launchUrl(context, Uri.parse(this))
 }

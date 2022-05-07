@@ -51,4 +51,9 @@ class HeaderTitleView : FrameLayout {
         val tvTitle = findViewById<TextView>(R.id.tvTitle);
         tvTitle.text = text
     }
+
+    fun setText(text:String){
+        val tvTitle = findViewById<TextView>(R.id.tvTitle);
+        tvTitle.text = text
+    }
 }

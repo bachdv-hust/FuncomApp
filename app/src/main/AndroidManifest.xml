@@ -27,7 +27,7 @@
             android:exported="false"
             />
         <activity
-            android:name=".ui.EventDetailActivity"
+            android:name=".ui.event_detail.EventDetailActivity"
             android:exported="false"
             android:label="@string/title_activity_event_detail"
             android:theme="@style/Theme.Hackathon.Fill" />
