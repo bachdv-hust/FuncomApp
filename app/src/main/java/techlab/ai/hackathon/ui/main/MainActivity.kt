@@ -16,6 +16,7 @@ import techlab.ai.hackathon.data.model.DemoModel
 import techlab.ai.hackathon.data.model.NewFeed
 import techlab.ai.hackathon.databinding.ActivityMainBinding
 import techlab.ai.hackathon.ui.base.BaseActivity
+import techlab.ai.hackathon.ui.login.LoginDialog
 import techlab.ai.hackathon.ui.main.adapter.NewFeedAdapter
 
 class MainActivity : BaseActivity(), MainView {
@@ -46,6 +47,9 @@ class MainActivity : BaseActivity(), MainView {
             adapter = newFeedAdapter
         }
 
+        binding.ivAvatar.setOnClickListener {
+            LoginDialog.show(supportFragmentManager)
+        }
         /// Call Api
         mainController.refreshDataNewFeed()
     }

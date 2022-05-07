@@ -18,6 +18,8 @@ object SharePref {
     var token: String by SharePrefDelegate(prefs, "token", "")
     var userName: String by SharePrefDelegate(prefs, "userName", "")
 
+    var isLogin : Boolean by SharePrefDelegate(prefs, "isLogin", false)
+
 
 
     @SuppressLint("CommitPrefEdits")

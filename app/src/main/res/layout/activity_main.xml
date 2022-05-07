@@ -29,6 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivAvatar"
                 android:layout_width="@dimen/dp_28"
                 android:layout_height="@dimen/dp_28"
                 android:layout_margin="@dimen/dp_18"

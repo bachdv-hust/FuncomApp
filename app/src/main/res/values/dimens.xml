@@ -264,5 +264,6 @@
     <dimen name="dp_29">29dp</dimen>
     <dimen name="dp_168">168dp</dimen>
     <dimen name="dp_118">118dp</dimen>
+    <dimen name="dp_86">86dp</dimen>
 
 </resources>
