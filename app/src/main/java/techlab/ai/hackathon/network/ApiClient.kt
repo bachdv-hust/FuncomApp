@@ -11,6 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import techlab.ai.hackathon.MyApplication
 import techlab.ai.hackathon.cached.SharePref
 
 /**
@@ -21,7 +22,7 @@ object ApiClient {
     private var apiInterface: ApiInterface? = null
     fun getInstance(context: Context): ApiInterface {
         if (apiInterface == null) {
-            apiInterface = createApiInterface(context)
+            apiInterface = createApiInterface(MyApplication.mContext)
         }
         return apiInterface!!
     }

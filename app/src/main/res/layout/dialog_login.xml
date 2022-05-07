@@ -52,22 +52,34 @@
             android:id="@+id/tvAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:hint="Mã nhân viên của bạn" />
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_15"
+            android:hint="Mã nhân viên của bạn"
+            android:padding="@dimen/dp_10"
+            android:textColor="#373636"
+            android:textColorHint="#B7B7B7" />
 
         <EditText
             android:id="@+id/tvPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:hint="Mật khẩu" />
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_15"
+            android:hint="Mật khẩu"
+            android:padding="@dimen/dp_10"
+            android:textColor="#373636"
+            android:textColorHint="#B7B7B7" />
 
         <EditText
             android:id="@+id/tvNameUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_10"
-            android:hint="Tên hiển thị" />
+            android:hint="Tên hiển thị"
+            android:padding="@dimen/dp_15"
+            android:textColor="#373636"
+            android:textColorHint="#B7B7B7" />
 
         <TextView
             android:id="@+id/btnLogin"

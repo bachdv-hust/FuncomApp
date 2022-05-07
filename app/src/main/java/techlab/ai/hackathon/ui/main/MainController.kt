@@ -8,7 +8,7 @@ import techlab.ai.hackathon.ui.base.BaseController
 /**
  * @author BachDV
  */
-class MainController(context: Context,private val mainView: MainView) : BaseController(context) {
+class MainController(private val mainView: MainView) : BaseController() {
 
     fun refreshDataNewFeed(){
         addDisposable(
