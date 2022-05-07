@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/dialog_result_question.xml",
+        "source": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/src/main/res/layout/dialog_result_question.xml"
+    },
+    {
+        "merged": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/item_question_multi_choice.xml",
+        "source": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/src/main/res/layout/item_question_multi_choice.xml"
+    },
+    {
+        "merged": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_main.xml",
+        "source": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_multi_choice.xml",
+        "source": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/src/main/res/layout/activity_multi_choice.xml"
+    },
+    {
+        "merged": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/view_custom_toast.xml",
+        "source": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/src/main/res/layout/view_custom_toast.xml"
+    },
+    {
+        "merged": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/dialog_success_question.xml",
+        "source": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/src/main/res/layout/dialog_success_question.xml"
+    },
+    {
+        "merged": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/item_anwser_multi_choice.xml",
+        "source": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/src/main/res/layout/item_anwser_multi_choice.xml"
+    },
+    {
+        "merged": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_login.xml",
+        "source": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/src/main/res/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/list_anwser_multi_choice.xml",
+        "source": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/src/main/res/layout/list_anwser_multi_choice.xml"
+    },
+    {
+        "merged": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_home.xml",
+        "source": "/Users/duongdo/Desktop/funtap/hackathon/FuncomApp/app/src/main/res/layout/fragment_home.xml"
+    }
+]

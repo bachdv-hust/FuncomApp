@@ -2,6 +2,7 @@ package techlab.ai.hackathon.network
 
 import io.reactivex.Observable
 import retrofit2.http.*
+import techlab.ai.hackathon.data.model.BaseResponse
 import techlab.ai.hackathon.data.model.*
 
 /**
@@ -47,6 +48,9 @@ interface ApiInterface {
         @Field("event_id") eventId: Long,
         @Field("content") content: String
     ): Observable<BaseResponse<Any>>
+    @POST("/events/user-joined")
+    fun event(eventId : Int) : Observable<BaseResponse<DemoModel>>
+
 
     @GET("shops")
     fun getShopPackage(): Observable<BaseListResponse<ShopPackage>>
