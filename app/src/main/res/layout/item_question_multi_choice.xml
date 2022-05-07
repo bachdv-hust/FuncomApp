@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:layout_height="wrap_content">
     <View
-        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_5"
         android:layout_width="@dimen/dp_4"
         android:background="@color/color_3CCA98"
         android:layout_height="@dimen/dp_17"/>

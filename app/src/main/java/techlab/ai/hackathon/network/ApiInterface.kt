@@ -2,7 +2,10 @@ package techlab.ai.hackathon.network
 
 import io.reactivex.Observable
 import retrofit2.http.*
+<<<<<<< HEAD
+=======
 import techlab.ai.hackathon.data.model.BaseResponse
+>>>>>>> e3acc12f5ef236a9c9cf793bbe66591fde05acf7
 import techlab.ai.hackathon.data.model.*
 
 /**

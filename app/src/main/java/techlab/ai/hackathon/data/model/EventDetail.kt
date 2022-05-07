@@ -1,6 +1,7 @@
 package techlab.ai.hackathon.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class EventDetail(
@@ -28,4 +29,4 @@ data class EventDetail(
     @SerializedName("updated_at") var updatedAt: String? = null,
     @SerializedName("user_joined") var userJoined: ArrayList<UserJoin> = arrayListOf()
 
-)
+) : Serializable
