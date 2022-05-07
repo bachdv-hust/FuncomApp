@@ -23,8 +23,11 @@
         android:theme="@style/Theme.Hackathon"
         android:usesCleartextTraffic="true">
         <activity
-                    android:name=".ui.multi_choice.MultiChoiceActivity"
-                    android:exported="false" />
+            android:name=".ui.view_descript.ViewDescriptionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.multi_choice.MultiChoiceActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.funshop.FunShopActivity"
             android:exported="false" />

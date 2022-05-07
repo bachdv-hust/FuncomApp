@@ -26,10 +26,12 @@ object SharePref {
 
     var userModel: String by SharePrefDelegate(prefs, "userModel", "")
 
-    fun setEventCached(idEvent:String,wait: Boolean){
+    fun setEventCached(idEvent:Int,wait: Boolean){
         prefs.edit().putBoolean("event_"+idEvent,wait).apply()
     }
-
+    fun getEventCached(idEvent:Int):Boolean{
+        return prefs.getBoolean("event_"+idEvent,false)
+    }
     @SuppressLint("CommitPrefEdits")
     fun clear() {
         prefs.edit().clear().apply()

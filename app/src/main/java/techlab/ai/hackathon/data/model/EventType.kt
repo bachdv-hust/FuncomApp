@@ -1,5 +1,7 @@
 package techlab.ai.hackathon.data.model
 
 enum class EventType(i: Int) {
-    DOWNLOAD(1),SURVEY(2)
+    DOWNLOAD(2),SURVEY(1);
+
+//    fun getType():Int =i
 }
