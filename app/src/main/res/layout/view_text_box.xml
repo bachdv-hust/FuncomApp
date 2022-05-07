@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="#F8F8F8" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_8"
+        android:paddingBottom="@dimen/dp_12">
+
+        <EditText
+            android:id="@+id/edtCmt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="5"
+            android:layout_weight="1"
+            android:background="@drawable/bg_edt_cmt"
+            android:paddingHorizontal="@dimen/dp_12"
+            android:paddingVertical="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/inter_regular"
+            android:hint="Nội dung trao đổi"
+            android:textColor="@color/black"
+            android:textColorHint="#A7A7A7"
+            android:textSize="@dimen/sp_12" />
+
+        <ImageView
+            android:id="@+id/btnSend"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:layout_marginStart="@dimen/dp_8"
+            android:src="@drawable/ic_send" />
+    </LinearLayout>
+</LinearLayout>

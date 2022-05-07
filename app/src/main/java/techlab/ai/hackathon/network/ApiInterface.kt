@@ -35,4 +35,16 @@ interface ApiInterface {
         @Field("username") username: String,
         @Field("password") password: String
     ): Observable<BaseResponse<UserModel>>
+
+    @GET("events/comments")
+    fun getComments(
+        @Query("event_id") id: Long
+    ): Observable<BaseListResponse<CommentModel>>
+
+    @FormUrlEncoded
+    @POST("events/comments")
+    fun postComment(
+        @Field("event_id") eventId: Long,
+        @Field("content") content: String
+    ): Observable<BaseResponse<Any>>
 }

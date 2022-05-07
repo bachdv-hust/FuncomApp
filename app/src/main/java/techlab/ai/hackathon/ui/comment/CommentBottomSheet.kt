@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import techlab.ai.hackathon.databinding.BottomSheetCommentBinding
 import techlab.ai.hackathon.ui.base.BaseDialogFragment
 
@@ -18,7 +19,11 @@ class CommentBottomSheet : BaseDialogFragment() {
 
     override fun afterCreatedView(view: View) {
         binding.rvList.apply {
-
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = CommentAdapter()
+        }
+        binding.container.setOnClickListener {
+            dismiss()
         }
     }
 
