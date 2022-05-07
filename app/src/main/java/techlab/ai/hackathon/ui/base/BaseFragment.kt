@@ -31,4 +31,24 @@ abstract class BaseFragment : Fragment() {
     ): View
 
     abstract fun afterCreatedView()
+    private var dialog: LoadingDialog?= null
+    protected open fun getDialog(): LoadingDialog? {
+        if (dialog == null) {
+            dialog = LoadingDialog.instance(requireActivity())
+            dialog?.setCancelable(true)
+        }
+        return dialog
+    }
+
+    protected open fun hideDialog() {
+        dialog?.hide()
+    }
+
+    protected open fun showDialog() {
+        try {
+            getDialog()?.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

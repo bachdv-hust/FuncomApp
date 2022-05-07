@@ -9,4 +9,5 @@ import techlab.ai.hackathon.data.model.NewFeed
 interface MainView {
 
     fun onNewFeedsResult(newFeeds : List<NewFeed>)
+    fun onFail()
 }

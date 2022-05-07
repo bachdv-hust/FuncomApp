@@ -54,6 +54,7 @@ class FunShopActivity : BaseActivity(),FunShopView {
         binding.btnBack.setOnClickListener {
             finish()
         }
+        showDialog()
         onRefresh()
     }
 
@@ -63,5 +64,6 @@ class FunShopActivity : BaseActivity(),FunShopView {
 
     override fun onResultPackage(packages: List<ShopPackage>) {
         funShopAdapter.listData = packages
+        hideDialog()
     }
 }

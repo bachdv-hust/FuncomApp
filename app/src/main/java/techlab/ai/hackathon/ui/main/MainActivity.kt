@@ -11,6 +11,8 @@ import techlab.ai.hackathon.R
 import techlab.ai.hackathon.cached.SharePref
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.pushdown.PushDownAnim
+import techlab.ai.hackathon.common.toast.AppToast
+import techlab.ai.hackathon.common.toast.ToastStyle
 import techlab.ai.hackathon.data.model.NewFeed
 import techlab.ai.hackathon.data.model.UserModel
 import techlab.ai.hackathon.databinding.ActivityMainBinding
@@ -71,6 +73,7 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener {
             FunShopActivity.startSelf(this)
         }
         // Call Api
+        showDialog()
         onRefresh()
     }
 
@@ -85,7 +88,13 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener {
     }
 
     override fun onNewFeedsResult(newFeeds: List<NewFeed>) {
+        hideDialog()
         newFeedAdapter.listData = newFeeds
+    }
+
+    override fun onFail() {
+        hideDialog()
+        AppToast.createToast(ToastStyle.ERROR).setText("Đã có lỗi xảy ra!").show(this)
     }
 
     override fun onLoginChanged(isLogged: Boolean) {

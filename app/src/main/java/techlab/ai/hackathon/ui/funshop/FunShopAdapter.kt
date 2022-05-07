@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import techlab.ai.hackathon.R
 import techlab.ai.hackathon.common.load
+import techlab.ai.hackathon.common.loadCorner
 import techlab.ai.hackathon.data.model.ShopPackage
 import techlab.ai.hackathon.databinding.ItemFunShopBinding
 
@@ -40,6 +42,11 @@ class FunShopAdapter : RecyclerView.Adapter<FunShopViewHolder>() {
 class FunShopViewHolder(private val binding: ItemFunShopBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindData(item: ShopPackage) {
-        binding.ivContent.load(url = item.thumbnailUrl)
+        binding.ivContent.loadCorner(
+            url = item.thumbnailUrl,
+            corner = binding.root.context.resources.getDimensionPixelOffset(
+                R.dimen.dp_8
+            )
+        )
     }
 }
