@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FEFCFF"
+    android:clipToPadding="false"
+    android:paddingBottom="@dimen/dp_80"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.event_detail.EventDetailActivity"
     tools:showIn="@layout/activity_event_detail">
@@ -200,10 +202,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_9"
-                    android:fontFamily="@font/inter_regular"
-                    android:paddingHorizontal="@dimen/dp_10"
-                    android:maxLines="3"
                     android:ellipsize="end"
+                    android:fontFamily="@font/inter_regular"
+                    android:maxLines="3"
+                    android:paddingHorizontal="@dimen/dp_10"
                     android:text="️🛒 Lễ đến gần nhu cầu tiêu dùng gia tăng, đừng
 quên Credita luôn sẵn sàng hỗ trợ bạn mỗi khi cần
 với những khoản vay phù hợp với mọi nhu cầu. Và
@@ -224,6 +226,22 @@ với những khoản vay phù hợp với mọi nhu cầu. Và
                     android:textSize="@dimen/sp_12" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <techlab.ai.hackathon.share_ui.HeaderTitleView
+            android:id="@+id/headerHighlight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_24"
+            app:text="Highlight" />
+
+        <LinearLayout
+            android:id="@+id/llHighlight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:orientation="vertical">
+
+        </LinearLayout>
 
         <techlab.ai.hackathon.share_ui.HeaderTitleView
             android:id="@+id/headerMission"
@@ -255,7 +273,8 @@ với những khoản vay phù hợp với mọi nhu cầu. Và
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="Tải ứng dụng"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
             <LinearLayout
@@ -276,7 +295,8 @@ với những khoản vay phù hợp với mọi nhu cầu. Và
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="Trắc nghiệm"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12" />
             </LinearLayout>
         </LinearLayout>
 
@@ -313,9 +333,9 @@ với những khoản vay phù hợp với mọi nhu cầu. Và
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:text="Xem thêm"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_12"
-                android:text="Xem thêm" />
+                android:textSize="@dimen/sp_12" />
         </RelativeLayout>
 
 
