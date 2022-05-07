@@ -17,6 +17,8 @@ import techlab.ai.hackathon.databinding.ActivityEventDetailBinding
 import techlab.ai.hackathon.databinding.ItemDonorsBinding
 import techlab.ai.hackathon.databinding.ItemLinksBinding
 import techlab.ai.hackathon.databinding.ItemUserJoinedBinding
+import techlab.ai.hackathon.ui.comment.CommentActivity
+import techlab.ai.hackathon.ui.persionjoined.PersonJoinedActivity
 
 class EventDetailActivity : AppCompatActivity(), EventDetailView {
 
@@ -48,6 +50,12 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
 
         val eventId = intent.getStringExtra("eventId")
         val userId = intent.getStringExtra("userId")
+        binding.btnShare.setOnClickListener {
+            CommentActivity.startSelf(this, eventId?.toLong() ?: -1)
+        }
+        binding.contentBody.btnSeeMore.setOnClickListener {
+            PersonJoinedActivity.startActivity(this,eventId!!)
+        }
         eventId?.let { userId?.let { it1 -> eventController.getEventDetail(it, it1) } }
     }
 
