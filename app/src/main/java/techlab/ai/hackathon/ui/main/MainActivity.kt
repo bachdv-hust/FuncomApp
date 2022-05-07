@@ -14,6 +14,7 @@ import techlab.ai.hackathon.common.toast.AppToast
 import techlab.ai.hackathon.common.toast.ToastStyle
 import techlab.ai.hackathon.data.model.DemoModel
 import techlab.ai.hackathon.databinding.ActivityMainBinding
+import techlab.ai.hackathon.ui.EventDetailActivity
 import techlab.ai.hackathon.ui.base.BaseActivity
 import techlab.ai.hackathon.ui.main.adapter.NewFeedAdapter
 
