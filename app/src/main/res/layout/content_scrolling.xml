@@ -23,12 +23,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/clock_1"
-                android:drawableLeft="8dp"
                 android:fontFamily="@font/inter_regular"
                 android:text="Thời gian: 07/05 - 20:00 - 10/05"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_11" />
+                android:textSize="@dimen/sp_11"
+                app:drawableStartCompat="@drawable/clock_1" />
 
             <TextView
                 android:layout_width="wrap_content"
