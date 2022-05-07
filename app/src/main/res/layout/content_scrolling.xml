@@ -59,7 +59,7 @@
             android:layout_marginTop="@dimen/dp_9"
             android:orientation="vertical">
 
-            <com.liihuu.progressbar.FloatTextProgressBar
+            <techlab.ai.hackathon.share_ui.progressbar.FloatTextProgressBar
                 android:id="@+id/progressCoin"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_50"

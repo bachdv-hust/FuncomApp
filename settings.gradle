@@ -16,4 +16,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Hackathon"
 include ':app'
-include ':progressbarlib'

@@ -71,7 +71,8 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
             binding.contentBody.progressCoin.setProgress(0)
         } else {
             val percentRemain = (receiveFunCoin / totalFunCoin) * 100
-            binding.contentBody.progressCoin.setProgress(percentRemain)
+            binding.contentBody.progressCoin.setProgress(receiveFunCoin)
+            binding.contentBody.progressCoin.setMaxProgress(totalFunCoin)
         }
 
         binding.contentBody.tvCoinCirculating.text = receiveFunCoin.toString()
