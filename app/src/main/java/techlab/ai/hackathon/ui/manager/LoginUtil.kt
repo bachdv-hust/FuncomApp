@@ -14,6 +14,7 @@ class LoginUtil {
             SharePref.userModel = Gson().toJson(userModel)
             SharePref.isLogin = true
             AppLoginManager.isLogged = true
+            SharePref.token = userModel.token?:""
         }
 
         fun setLogout(){

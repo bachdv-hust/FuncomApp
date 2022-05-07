@@ -23,9 +23,13 @@
         android:theme="@style/Theme.Hackathon"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.comment.CommentActivity"
+            android:theme="@style/Theme.Transparent"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+        <activity
             android:name=".ui.profile.ProfileActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".ui.EventDetailActivity"
             android:exported="false"
@@ -36,8 +40,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

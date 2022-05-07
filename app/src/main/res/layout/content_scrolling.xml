@@ -191,6 +191,7 @@ với những khoản vay phù hợp với mọi nhu cầu. Và
                     android:textSize="@dimen/sp_12" />
 
                 <TextView
+                    android:id="@+id/tvMore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/bg_btn_register_disable.xml" value="0.2345" />
         <entry key="app/src/main/res/drawable/bg_btn_register_enable.xml" value="0.2345" />
         <entry key="app/src/main/res/drawable/bg_cmt_bottom_sheet.xml" value="0.2345" />
+        <entry key="app/src/main/res/drawable/bg_edt_cmt.xml" value="0.2345" />
         <entry key="app/src/main/res/drawable/bg_edt_login.xml" value="0.2345" />
         <entry key="app/src/main/res/drawable/bg_event_ended.xml" value="0.2345" />
         <entry key="app/src/main/res/drawable/bg_home_coin_current.xml" value="0.2345" />
@@ -22,12 +23,17 @@
         <entry key="app/src/main/res/drawable/ic_shop_bag.xml" value="0.2345" />
         <entry key="app/src/main/res/drawable/ic_toast_cancel.xml" value="0.2345" />
         <entry key="app/src/main/res/drawable/selector_bg_btn_register.xml" value="0.2345" />
+        <entry key="app/src/main/res/layout/activity_comment.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/activity_event_detail.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3591485507246377" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.3591485507246377" />
         <entry key="app/src/main/res/layout/bottom_sheet_comment.xml" value="0.3591485507246377" />
+        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/dialog_login.xml" value="0.3591485507246377" />
+        <entry key="app/src/main/res/layout/item_comment.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/item_new_feed.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/view_custom_toast.xml" value="0.3591485507246377" />
+        <entry key="app/src/main/res/layout/view_text_box.xml" value="0.25052083333333336" />
       </map>
     </option>
   </component>
