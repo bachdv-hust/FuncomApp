@@ -11,6 +11,7 @@ import com.google.gson.Gson
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.cached.SharePref
 import techlab.ai.hackathon.common.load
+import techlab.ai.hackathon.common.loadCorner
 import techlab.ai.hackathon.common.pushdown.PushDownAnim
 import techlab.ai.hackathon.data.model.NewFeed
 import techlab.ai.hackathon.data.model.UserModel
@@ -53,7 +54,7 @@ class NewFeedViewHolder(private val binding: ItemNewFeedBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindData(item: NewFeed) {
         try {
-            binding.ivContent.load(url = item.thumbnailUrl)
+            binding.ivContent.loadCorner(url = item.thumbnailUrl, corner = binding.root.context.resources.getDimensionPixelOffset(R.dimen.dp_8))
             binding.tvTitle.text = item.title ?: ""
             binding.tvTotalCoin.text = (item.totalFunCoin ?: 0).toInt().toString()
             binding.tvJoined.visibility = if (item.isUserJoined) View.VISIBLE else View.GONE

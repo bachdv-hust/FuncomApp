@@ -42,7 +42,6 @@ abstract class BaseDialogFragment : DialogFragment() {
             false
         }
         dialog1.setOnKeyListener(dialogWelcomeNavigationOnKey)
-        dialog1.setOnKeyListener(dialogWelcomeNavigationOnKey)
         val viewContent =  initBindingView()
         dialog1.setContentView(viewContent)
         afterCreatedView(viewContent)
@@ -51,5 +50,25 @@ abstract class BaseDialogFragment : DialogFragment() {
 
     abstract fun initBindingView() :View
     abstract fun afterCreatedView( view: View)
+    private var dialog: LoadingDialog?= null
+    protected  fun getDialog1(): LoadingDialog? {
+        if (dialog == null) {
+            dialog = LoadingDialog.instance(requireActivity())
+            dialog?.setCancelable(true)
+        }
+        return dialog
+    }
+
+    protected open fun hideDialog() {
+        dialog?.hide()
+    }
+
+    protected open fun showDialog() {
+        try {
+            getDialog1()?.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
 }

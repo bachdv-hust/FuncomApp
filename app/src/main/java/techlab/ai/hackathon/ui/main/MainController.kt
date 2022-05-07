@@ -22,6 +22,7 @@ class MainController(private val mainView: MainView) : BaseController() {
                         }
                     }, {
                         it.printStackTrace()
+                        mainView.onFail()
                     }
                 )
         )
