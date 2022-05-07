@@ -37,7 +37,7 @@ class CommentActivity : BaseActivity(),CommentView {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        overridePendingTransition(R.anim.nothing,R.anim.nothing)
+        overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up )
         super.onCreate(savedInstanceState)
     }
 
@@ -87,5 +87,14 @@ class CommentActivity : BaseActivity(),CommentView {
 
     private fun refresh(){
         commentController.getComment(eventId)
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition( R.anim.slide_out_bottom, R.anim.slide_out_bottom )
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        commentController.clear()
     }
 }

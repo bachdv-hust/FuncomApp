@@ -23,10 +23,13 @@
         android:theme="@style/Theme.Hackathon"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.comment.CommentActivity"
-            android:theme="@style/Theme.Transparent"
-            android:windowSoftInputMode="adjustResize"
+            android:name=".ui.persionjoined.PersonJoinedActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.comment.CommentActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Transparent"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.profile.ProfileActivity"
             android:exported="false" />

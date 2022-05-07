@@ -17,10 +17,13 @@
 
     <style name="Theme.Transparent" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/black</item>
     </style>
+
 
 
     <style name="AnimationActivity" parent="@android:style/Animation.Activity">
