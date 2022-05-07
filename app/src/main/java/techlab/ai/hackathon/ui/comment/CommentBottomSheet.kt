@@ -1,6 +1,7 @@
 package techlab.ai.hackathon.ui.comment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import techlab.ai.hackathon.databinding.BottomSheetCommentBinding
@@ -11,7 +12,7 @@ class CommentBottomSheet : BaseDialogFragment() {
     private lateinit var binding: BottomSheetCommentBinding
 
     override fun initBindingView(): View {
-        binding = BottomSheetCommentBinding.inflate(layoutInflater)
+        binding = BottomSheetCommentBinding.inflate(LayoutInflater.from(requireContext()),null,false)
         return binding.root
     }
 
