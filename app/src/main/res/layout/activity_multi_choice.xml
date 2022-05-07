@@ -70,6 +70,7 @@
         android:paddingTop="@dimen/dp_12"
         android:paddingBottom="@dimen/dp_12"
         android:textAllCaps="false"
+        android:text="@string/confirm_finish"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_18" />
 

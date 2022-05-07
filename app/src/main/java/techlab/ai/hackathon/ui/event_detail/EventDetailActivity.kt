@@ -16,6 +16,7 @@ import techlab.ai.hackathon.data.model.EventDetail
 import techlab.ai.hackathon.databinding.*
 import techlab.ai.hackathon.share_ui.avatagen.AvatarGenerator
 import techlab.ai.hackathon.ui.comment.CommentActivity
+import techlab.ai.hackathon.ui.multi_choice.MultiChoiceActivity
 import techlab.ai.hackathon.ui.persionjoined.PersonJoinedActivity
 import techlab.ai.hackathon.ui.view_descript.ViewDescriptionActivity
 import kotlin.math.abs
@@ -85,6 +86,13 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
                 checkStateJoin(eventDetail)
             } else {
                 //tham gia
+                if (eventDetail.type==1) {
+                    var intent = Intent(this,MultiChoiceActivity::class.java)
+                    var bundle = Bundle()
+                    bundle.putSerializable("data",eventDetail)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                }
                 SharePref.setEventCached(eventDetail.id!!, true)
                 checkStateJoin(eventDetail)
             }
