@@ -16,7 +16,6 @@ import techlab.ai.hackathon.data.model.EventDetail
 import techlab.ai.hackathon.databinding.*
 import techlab.ai.hackathon.share_ui.avatagen.AvatarGenerator
 import techlab.ai.hackathon.ui.comment.CommentActivity
-import techlab.ai.hackathon.ui.multi_choice.MultiChoiceActivity
 import techlab.ai.hackathon.ui.persionjoined.PersonJoinedActivity
 import techlab.ai.hackathon.ui.view_descript.ViewDescriptionActivity
 import kotlin.math.abs
@@ -91,26 +90,6 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
             }
 
         }
-<<<<<<< HEAD
-
-        binding.contentBody.ctnSurvey.setOnClickListener {
-            val intent = Intent(this,MultiChoiceActivity::class.java)
-            val bundle = Bundle()
-            bundle.putSerializable("data",eventDetail)
-            intent.putExtras(bundle)
-            startActivity(intent)
-        }
-        //nha tai tro
-        if (!eventDetail.donors.isNullOrEmpty()) {
-            for (donor in eventDetail.donors) {
-                val viewDonors =
-                    LayoutInflater.from(this)
-                        .inflate(R.layout.item_donors, binding.contentBody.llDonors, false)
-                val vDonor = ItemDonorsBinding.bind(viewDonors)
-                vDonor.ivUserAvatar.load(url = donor.icon)
-                vDonor.tvDonors.text = donor.name
-                binding.contentBody.llDonors.addView(viewDonors)
-=======
     }
 
     override fun onEventDetailResult(eventDetail: EventDetail) {
@@ -136,7 +115,6 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
             }
             binding.contentBody.tvEventDescription.setOnClickListener {
                 ViewDescriptionActivity.startActivity(this, eventDetail.description!!)
->>>>>>> e3acc12f5ef236a9c9cf793bbe66591fde05acf7
             }
             binding.contentBody.headerUserJoin.setOnClickListener {
                 PersonJoinedActivity.startActivity(this, eventDetail)
