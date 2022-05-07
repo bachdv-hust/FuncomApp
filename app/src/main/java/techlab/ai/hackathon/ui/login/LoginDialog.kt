@@ -57,9 +57,9 @@ class LoginDialog : BaseDialogFragment(), LoginView {
 
     private fun checkStateBtnLogin(): Boolean {
         return if (uiIsRegister) {
-            !binding.tvPassword.text.isNullOrBlank() && !binding.tvAccount.text.isNullOrBlank() && !binding.tvNameUser.text.isNullOrBlank()
+            binding.tvPassword.text.length>=6 && !binding.tvAccount.text.isNullOrBlank() && !binding.tvNameUser.text.isNullOrBlank()
         } else {
-            !binding.tvPassword.text.isNullOrBlank() && !binding.tvAccount.text.isNullOrBlank()
+            binding.tvPassword.text.length>=6 && !binding.tvAccount.text.isNullOrBlank()
         }
     }
 
@@ -117,6 +117,7 @@ class LoginDialog : BaseDialogFragment(), LoginView {
         })
 
         binding.btnLogin.setOnClickListener {
+            showDialog()
             if (uiIsRegister) {
                 loginController.register(binding.tvAccount.text.toString(),binding.tvPassword.text.toString(),binding.tvNameUser.text.toString())
             } else {
@@ -146,6 +147,7 @@ class LoginDialog : BaseDialogFragment(), LoginView {
     }
 
     override fun registerSuccess(user: UserModel) {
+        hideDialog()
         AppToast.createToast(ToastStyle.DONE).setText("Đăng kí thành công").show(requireContext())
         AppToast.createToast(ToastStyle.DONE)
             .setText("Chào mừng ${user.firstName + " " + user.lastName} đến với Funcom!")
@@ -154,10 +156,12 @@ class LoginDialog : BaseDialogFragment(), LoginView {
     }
 
     override fun registerFail(message: String) {
+        hideDialog()
         AppToast.createToast(ToastStyle.ERROR).setText(message).show(requireContext())
     }
 
     override fun loginSuccess(user: UserModel) {
+        hideDialog()
         AppToast.createToast(ToastStyle.DONE).setText("Đăng nhập thành công").show(requireContext())
         AppToast.createToast(ToastStyle.DONE)
             .setText("Chào mừng ${user.firstName + " " + user.lastName} đến với Funcom!")
@@ -166,6 +170,7 @@ class LoginDialog : BaseDialogFragment(), LoginView {
     }
 
     override fun loginFail(message: String) {
+        hideDialog()
         AppToast.createToast(ToastStyle.ERROR).setText(message).show(requireContext())
     }
 

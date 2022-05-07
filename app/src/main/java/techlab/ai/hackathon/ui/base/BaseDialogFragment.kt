@@ -33,7 +33,6 @@ abstract class BaseDialogFragment : DialogFragment() {
         }
         val dialogWelcomeNavigationOnKey = DialogInterface.OnKeyListener { dialog, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BACK) {
-//                TrackingEventImpl.getInstance().sendEventPopupAds(ads, TrackingEventConstant.Value.CLOSE)
                 dialog.dismiss()
                 dialog.cancel()
                 // move other fragment

@@ -3,11 +3,10 @@
 
     <style name="DialogFragment" parent="Base.Theme.AppCompat.Light.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
-
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
         <!--Set full screen dialog-->
-
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
     <style name="loading_dialog" parent="Theme.MaterialComponents.Dialog">
