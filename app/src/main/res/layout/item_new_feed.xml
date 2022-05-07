@@ -1,22 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginBottom="@dimen/dp_18"
     android:paddingHorizontal="@dimen/dp_16">
 
     <ImageView
-        tools:background="#000000"
         android:id="@+id/ivContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="#000000" />
+    <View
+        android:background="@drawable/gradient_item_feed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        android:background="@drawable/bg_persion_count"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:layout_width="@dimen/dp_14"
+            android:layout_height="@dimen/dp_8"
+            android:layout_margin="@dimen/dp_6"
+            android:src="@drawable/ic_persion" />
+
+        <TextView
+            android:id="@+id/tvPersonCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_6"
+            android:fontFamily="@font/inter_semi_bold"
+            android:text="25 người tham gia"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_10" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvJoined"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:background="@drawable/bg_persion_count"
+        android:paddingHorizontal="@dimen/dp_7"
+        android:paddingVertical="@dimen/dp_4"
+        android:textSize="@dimen/sp_10"
+        android:fontFamily="@font/inter_semi_bold"
+        android:text="Đã tham gia"
+        android:textColor="#FAB600"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,11 +74,24 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
+            android:id="@+id/tvEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_tv_endtime"
+            android:paddingHorizontal="@dimen/dp_8"
+            android:paddingVertical="@dimen/dp_5"
+            android:text="18:00 - 20/05"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_10" />
+
+        <TextView
             android:id="@+id/tvTitle"
-            android:layout_marginBottom="@dimen/dp_26"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginBottom="@dimen/dp_26"
             android:fontFamily="@font/inter_bold"
             android:gravity="center_horizontal"
             android:text="GIẢI ĐỐ NHẬN QUÀ CÙNG ONE TEAM"
@@ -39,12 +101,12 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
-            android:layout_marginBottom="@dimen/dp_12"
             android:layout_width="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/dp_12"
             android:background="@drawable/bg_item_feed_coin"
+            android:gravity="center_vertical"
             android:paddingHorizontal="@dimen/dp_10">
 
             <ImageView
@@ -55,13 +117,13 @@
 
             <TextView
                 android:id="@+id/tvTotalCoin"
-                android:textColor="@color/white"
-                android:fontFamily="@font/inter_bold"
-                android:textSize="@dimen/sp_10"
-                android:layout_marginStart="@dimen/dp_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="500.000" />
+                android:layout_marginStart="@dimen/dp_5"
+                android:fontFamily="@font/inter_bold"
+                android:text="500.000"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_10" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

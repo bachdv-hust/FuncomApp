@@ -30,6 +30,7 @@ object ApiClient {
     private fun createApiInterface(context: Context): ApiInterface {
         val gson = GsonBuilder()
             .setLenient()
+            .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create()
 
         val retrofit: Retrofit = Retrofit.Builder()

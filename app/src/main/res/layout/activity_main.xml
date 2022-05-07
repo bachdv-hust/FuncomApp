@@ -63,7 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_10"
-                        android:text="100"
+                        android:text="0"
                         android:textColor="#F2783D"
                         android:textSize="@dimen/sp_18" />
                 </LinearLayout>

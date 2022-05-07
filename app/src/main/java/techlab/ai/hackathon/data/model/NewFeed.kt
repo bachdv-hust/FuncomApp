@@ -14,9 +14,6 @@ class NewFeed {
     @SerializedName("title")
     var title: String? = null
 
-    @SerializedName("description")
-    var description: String? = null
-
     @SerializedName("type")
     var type: Int = 0
 
@@ -26,13 +23,19 @@ class NewFeed {
     @SerializedName("remaining_fun_coin")
     var remainingFunCoin: Double? = null
 
-    @SerializedName("time_start")
+    @SerializedName("start_date")
     var timeStart: Date? = null
 
-    @SerializedName("time_end")
+    @SerializedName("end_date")
     var timeEnd: Date? = null
 
     @SerializedName("thumbnail_url")
     var thumbnailUrl: String? = null
+
+    @SerializedName("is_user_joined")
+    var isUserJoined: Boolean = false
+
+    @SerializedName("user_joined_count")
+    var userJoinedCount: Int = 0
 
 }

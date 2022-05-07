@@ -2,12 +2,19 @@ package techlab.ai.hackathon.ui.main.adapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import techlab.ai.hackathon.R
 import techlab.ai.hackathon.common.load
+import techlab.ai.hackathon.common.pushdown.PushDownAnim
 import techlab.ai.hackathon.data.model.NewFeed
 import techlab.ai.hackathon.databinding.ItemNewFeedBinding
 import techlab.ai.hackathon.ui.EventDetailActivity
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * @author BachDV
@@ -38,13 +45,38 @@ class NewFeedAdapter : RecyclerView.Adapter<NewFeedViewHolder>() {
     override fun getItemCount(): Int = listData.size
 }
 
-class NewFeedViewHolder( val binding: ItemNewFeedBinding) : RecyclerView.ViewHolder(binding.root) {
+class NewFeedViewHolder(private val binding: ItemNewFeedBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bindData(item : NewFeed){
-        binding.ivContent.load(url = item.thumbnailUrl)
-        binding.tvTitle.text = item.title ?: ""
-        binding.tvTotalCoin.text = (item.totalFunCoin ?: 0).toInt().toString()
-        binding.ivContent.setOnClickListener {
+        try {
+            binding.ivContent.load(url = item.thumbnailUrl)
+            binding.tvTitle.text = item.title ?: ""
+            binding.tvTotalCoin.text = (item.totalFunCoin ?: 0).toInt().toString()
+            binding.tvJoined.visibility = if (item.isUserJoined) View.VISIBLE else View.GONE
+            binding.tvEndTime.visibility = View.VISIBLE
+            binding.tvPersonCount.text = "${item.userJoinedCount} người đã tham gia"
+            showEndTime(item = item,isEndedTime = item.timeEnd?.before(Date())?:true)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        PushDownAnim.setPushDownAnimTo(binding.ivContent).setOnClickListener {
             binding.ivContent.context.startActivity(Intent(binding.ivContent.context, EventDetailActivity::class.java))
+        }
+    }
+
+    private fun showEndTime(item : NewFeed,isEndedTime : Boolean){
+        if (isEndedTime){
+            binding.tvEndTime.text= "ĐÃ KẾT THÚC"
+            binding.tvEndTime.background = ContextCompat.getDrawable(binding.root.context,R.drawable.bg_event_ended)
+        }else{
+            item.timeEnd?.let { date ->
+                val dateFormat: DateFormat = SimpleDateFormat("hh:mm - dd/mm/yyyy ")
+                val strDate: String = dateFormat.format(date)
+                binding.tvEndTime.text = strDate
+            }?: kotlin.run {
+                binding.tvEndTime.visibility = View.GONE
+            }
+            binding.tvEndTime.background = ContextCompat.getDrawable(binding.root.context,R.drawable.bg_tv_endtime)
         }
     }
 }

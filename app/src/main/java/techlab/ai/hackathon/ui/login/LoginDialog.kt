@@ -124,6 +124,10 @@ class LoginDialog : BaseDialogFragment(), LoginView {
             }
         }
 
+        binding.btnExit.setOnClickListener {
+            dismiss()
+        }
+
     }
 
     companion object {
