@@ -266,5 +266,6 @@
     <dimen name="dp_118">118dp</dimen>
     <dimen name="app_bar_height">310dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="dp_86">86dp</dimen>
 
 </resources>

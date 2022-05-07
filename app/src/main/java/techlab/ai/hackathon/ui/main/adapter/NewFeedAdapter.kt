@@ -1,5 +1,5 @@
 package techlab.ai.hackathon.ui.main.adapter
-
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,6 +14,13 @@ import techlab.ai.hackathon.ui.EventDetailActivity
  */
 class NewFeedAdapter : RecyclerView.Adapter<NewFeedViewHolder>() {
 
+    var listData: List<NewFeed> = arrayListOf()
+        @SuppressLint("NotifyDataSetChanged")
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewFeedViewHolder {
         return NewFeedViewHolder(
             ItemNewFeedBinding.inflate(
@@ -25,15 +32,17 @@ class NewFeedAdapter : RecyclerView.Adapter<NewFeedViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: NewFeedViewHolder, position: Int) {
-        holder.bindData(NewFeed())
+        holder.bindData(listData[position])
     }
 
-    override fun getItemCount(): Int = 10
+    override fun getItemCount(): Int = listData.size
 }
 
 class NewFeedViewHolder( val binding: ItemNewFeedBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bindData(item : NewFeed){
-        binding.ivContent.load("https://scontent.fhan3-2.fna.fbcdn.net/v/t39.30808-6/278795851_492996349243829_6497627413104981301_n.jpg?_nc_cat=107&ccb=1-6&_nc_sid=5cd70e&_nc_ohc=Ip2zT0inqzQAX82yJMB&_nc_ht=scontent.fhan3-2.fna&oh=00_AT9gLnFgScnXy1iMjFlm7Rn62QZ4tIeSYDXDZ46-cKHnUg&oe=627A583C")
+        binding.ivContent.load(url = item.thumbnailUrl)
+        binding.tvTitle.text = item.title ?: ""
+        binding.tvTotalCoin.text = (item.totalFunCoin ?: 0).toInt().toString()
         binding.ivContent.setOnClickListener {
             binding.ivContent.context.startActivity(Intent(binding.ivContent.context, EventDetailActivity::class.java))
         }

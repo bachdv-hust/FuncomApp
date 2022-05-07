@@ -20,7 +20,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Hackathon">
+        android:theme="@style/Theme.Hackathon"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false"
+            />
         <activity
             android:name=".ui.EventDetailActivity"
             android:exported="false"

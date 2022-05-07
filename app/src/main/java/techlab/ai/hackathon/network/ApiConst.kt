@@ -5,6 +5,6 @@ package techlab.ai.hackathon.network
  */
 object ApiConst {
 
-    const val  API_URL = "https://dev-api.hackathon.vn/"
+    const val  API_URL = "http://35.247.174.27:8000/api/"
 
 }
