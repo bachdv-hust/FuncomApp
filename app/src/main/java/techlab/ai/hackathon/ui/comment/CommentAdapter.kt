@@ -42,10 +42,10 @@ class CommentViewHolder(private val binding: ItemCommentBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindData(item: CommentModel) {
         try {
-            binding.ivAvatar.load(url = item.content)
             binding.tvContent.text = item.content
             item.user?.let { user ->
-                binding.tvName.text = user.firstName ?: "" + user.lastName ?: ""
+                binding.tvName.text = (user.firstName ?: "") + (user.lastName ?: "")
+                binding.ivAvatar.load(url = user.avatar)
             } ?: kotlin.run {
                 binding.tvName.text = ""
             }
