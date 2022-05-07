@@ -96,5 +96,10 @@
     <color name="bg_btn_login_google">#E5E5EB</color>
     <color name="bg_btn_login_google_light">#E5E5EB</color>
     <color name="bg_btn_login_google_dark">#3A3A3C</color>
+    <color name="color_EAEAEA">#EAEAEA</color>
+    <color name="color_E5E5E5">#E5E5E5</color>
+    <color name="color_FF9365">#FF9365</color>
+    <color name="color_3CCA98">#3CCA98</color>
+    <color name="color_F0B20B">#F0B20B</color>
 
 </resources>

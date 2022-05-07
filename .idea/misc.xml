@@ -3,38 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/background_btn_give_coin.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable-v24/background_btn_multichoice.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable-v24/background_btn_multichoice_disable.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable-v24/background_btn_multichoice_enable.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable-v24/background_btn_try.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable-v24/background_dialog_result_question.xml" value="0.221" />
         <entry key="app/src/main/res/drawable-v24/ic_toast_cancel.xml" value="0.2345" />
         <entry key="app/src/main/res/drawable/background.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_btn_register_disable.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_btn_register_enable.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_cmt_bottom_sheet.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_edt_cmt.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_edt_login.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_event_ended.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_home_coin_current.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_home_funshop.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_item_feed_coin.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_login_screen.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_login_top.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_persion_count.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_rectange_blue.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/bg_tv_endtime.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/gradient_item_feed.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/ic_shop_bag.xml" value="0.2345" />
+        <entry key="app/src/main/res/drawable/background_btn_try_disable.xml" value="0.2605" />
         <entry key="app/src/main/res/drawable/ic_toast_cancel.xml" value="0.2345" />
-        <entry key="app/src/main/res/drawable/selector_bg_btn_register.xml" value="0.2345" />
-        <entry key="app/src/main/res/layout/activity_comment.xml" value="0.25052083333333336" />
-        <entry key="app/src/main/res/layout/activity_event_detail.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/drawable/question_select.xml" value="0.2265" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3591485507246377" />
-        <entry key="app/src/main/res/layout/activity_person_joined.xml" value="0.3591485507246377" />
-        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.3591485507246377" />
-        <entry key="app/src/main/res/layout/bottom_sheet_comment.xml" value="0.3591485507246377" />
-        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.25052083333333336" />
-        <entry key="app/src/main/res/layout/dialog_login.xml" value="0.3591485507246377" />
-        <entry key="app/src/main/res/layout/item_comment.xml" value="0.25052083333333336" />
-        <entry key="app/src/main/res/layout/item_new_feed.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/activity_multi_choice.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/dialogresultquestion.xml" value="0.2557291666666667" />
+        <entry key="app/src/main/res/layout/item_anwser_multi_choice.xml" value="0.3591485507246377" />
+        <entry key="app/src/main/res/layout/item_question_multi_choice.xml" value="0.3591485507246377" />
+        <entry key="app/src/main/res/layout/success_question.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/layout/view_custom_toast.xml" value="0.3591485507246377" />
-        <entry key="app/src/main/res/layout/view_text_box.xml" value="0.25052083333333336" />
       </map>
     </option>
   </component>
