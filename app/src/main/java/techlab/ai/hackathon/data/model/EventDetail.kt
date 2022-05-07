@@ -20,6 +20,7 @@ data class EventDetail(
     @SerializedName("thumbnail_url") var thumbnailUrl: String? = null,
     @SerializedName("links") var links: ArrayList<Links> = arrayListOf(),
     @SerializedName("donors") var donors: ArrayList<Donors> = arrayListOf(),
+    @SerializedName("highlights") var highlights: ArrayList<Highlight> = arrayListOf(),
     @SerializedName("questions") var questions: ArrayList<Questions> = arrayListOf(),
     @SerializedName("created_by") var createdBy: CreatedBy? = CreatedBy(),
     @SerializedName("updated_by") var updatedBy: UpdatedBy? = UpdatedBy(),
