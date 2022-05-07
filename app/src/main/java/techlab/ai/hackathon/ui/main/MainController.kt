@@ -10,21 +10,21 @@ import techlab.ai.hackathon.ui.base.BaseController
  */
 class MainController(context: Context,private val mainView: MainView) : BaseController(context) {
 
-    fun callApi() {
-       addDisposable(
-           retrofit.getDemo()
-               .subscribeOn(Schedulers.io())
-               .observeOn(AndroidSchedulers.mainThread())
-               .subscribe(
-                   {
-                       it.data?.let {model->
-                           mainView.callBack(model)
-                       }
-                   }, {
-                       it.printStackTrace()
-                   }
-               )
-       )
+    fun refreshDataNewFeed(){
+        addDisposable(
+            retrofit.getDataNewFeed()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        it.data?.let {model->
+                            mainView.onNewFeedsResult(model)
+                        }
+                    }, {
+                        it.printStackTrace()
+                    }
+                )
+        )
     }
 
 }

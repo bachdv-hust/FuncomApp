@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
-    android:background="@color/white"
+    android:background="#FEFCFF"
     android:orientation="vertical"
     tools:context=".ui.main.MainActivity">
 
@@ -157,6 +157,8 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
             android:id="@+id/rvList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -13,16 +13,17 @@ import techlab.ai.hackathon.cached.SharePref
 import techlab.ai.hackathon.common.toast.AppToast
 import techlab.ai.hackathon.common.toast.ToastStyle
 import techlab.ai.hackathon.data.model.DemoModel
+import techlab.ai.hackathon.data.model.NewFeed
 import techlab.ai.hackathon.databinding.ActivityMainBinding
 import techlab.ai.hackathon.ui.base.BaseActivity
 import techlab.ai.hackathon.ui.main.adapter.NewFeedAdapter
 
 class MainActivity : BaseActivity(), MainView {
 
-    companion object{
+    companion object {
         @JvmStatic
-        fun startSelf(context : Context){
-            val starter = Intent(context,MainActivity::class.java)
+        fun startSelf(context: Context) {
+            val starter = Intent(context, MainActivity::class.java)
             context.startActivity(starter)
         }
     }
@@ -35,21 +36,27 @@ class MainActivity : BaseActivity(), MainView {
         return binding.root
     }
 
-    override fun afterCreatedView() {
-        mainController = MainController(this,this)
+    private lateinit var newFeedAdapter: NewFeedAdapter
 
+    override fun afterCreatedView() {
+        mainController = MainController(this, this)
+        newFeedAdapter = NewFeedAdapter()
         binding.rvList.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = NewFeedAdapter()
+            adapter = newFeedAdapter
         }
+
+        /// Call Api
+        mainController.refreshDataNewFeed()
     }
 
-    override fun callBack(model: DemoModel) {
-
-    }
 
     override fun onDestroy() {
         super.onDestroy()
         mainController.clear()
+    }
+
+    override fun onNewFeedsResult(newFeeds: List<NewFeed>) {
+        newFeedAdapter.listData = newFeeds
     }
 }

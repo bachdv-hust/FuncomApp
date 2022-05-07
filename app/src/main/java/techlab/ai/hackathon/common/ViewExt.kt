@@ -75,7 +75,6 @@ fun ImageView.loadCorner(
     val requestOptions = RequestOptions()
     requestOptions.centerCrop()
     requestOptions.transform(CenterCrop(), RoundedCorners(corner))
-//        requestOptions.placeholder(R.drawable.placeholder_image);
     requestOptions.placeholder(placeholder)
     requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL)
     Glide.with(context)

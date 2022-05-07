@@ -1,31 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginBottom="@dimen/dp_18"
-    android:paddingHorizontal="@dimen/dp_16"
-    android:layout_height="wrap_content">
+    android:paddingHorizontal="@dimen/dp_16">
+
     <ImageView
+        tools:background="#000000"
         android:id="@+id/ivContent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"/>
-
-    <TextView
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginHorizontal="@dimen/dp_16"
-        android:layout_marginBottom="@dimen/dp_46"
-        android:layout_width="0dp"
-        android:gravity="center_horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="#FFFFFF"
-        android:fontFamily="@font/inter_bold"
-        android:textSize="@dimen/sp_22"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="GIẢI ĐỐ NHẬN QUÀ CÙNG ONE TEAM"
-        />
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_marginBottom="@dimen/dp_26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_horizontal"
+            android:text="GIẢI ĐỐ NHẬN QUÀ CÙNG ONE TEAM"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/sp_22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:layout_marginBottom="@dimen/dp_12"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item_feed_coin"
+            android:paddingHorizontal="@dimen/dp_10">
+
+            <ImageView
+                android:layout_width="@dimen/dp_10"
+                android:layout_height="@dimen/dp_10"
+                android:layout_marginVertical="@dimen/dp_5"
+                android:src="@drawable/ic_coin" />
+
+            <TextView
+                android:id="@+id/tvTotalCoin"
+                android:textColor="@color/white"
+                android:fontFamily="@font/inter_bold"
+                android:textSize="@dimen/sp_10"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="500.000" />
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
