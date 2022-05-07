@@ -13,11 +13,11 @@
 
         <ImageView
             android:id="@+id/ivBack"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_width="@dimen/dp_18"
             android:layout_height="@dimen/dp_18"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/dp_18"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_back_person" />
 
         <TextView
@@ -39,10 +39,110 @@
         android:id="@+id/rvList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:orientation="vertical">
 
+        <techlab.ai.hackathon.share_ui.progressbar.FloatTextProgressBar
+            android:id="@+id/progressCoin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_8"
+            app:arrowPointRadius="50dp"
+            app:backgroundColor="#d8d8d8"
+            app:fillColor="#3CCA98"
+            app:maxProgress="100"
+            app:progress="50"
+            app:progressWidth="@dimen/dp_8"
+            app:rectColor="#3CCA98"
+            app:textColor="#fff"
+            app:triangleColor="#3CCA98" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_7">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="Coin đã phân phát"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_10" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_15"
+                        android:layout_height="@dimen/dp_15"
+                        android:src="@drawable/ic_coin" />
+
+                    <TextView
+                        android:id="@+id/tvCoinCirculating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:fontFamily="@font/inter_semi_bold"
+                        android:text="500.000"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="Tổng coin thưởng"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_10" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|right"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_15"
+                        android:layout_height="@dimen/dp_15"
+                        android:src="@drawable/ic_coin" />
+
+                    <TextView
+                        android:id="@+id/tvCoinTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:fontFamily="@font/inter_semi_bold"
+                        android:text="1.500.000"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

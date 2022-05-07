@@ -24,7 +24,7 @@ class UserModel {
     @SerializedName("token")
     var token: String? = null
 
-    @SerializedName("totalCoin")
+    @SerializedName("fun_coin")
     var totalCoin: Double = 0.0
 
     fun nameDisplay() =firstName + " "+ lastName

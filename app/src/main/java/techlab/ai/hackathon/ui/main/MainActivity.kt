@@ -10,10 +10,12 @@ import com.google.gson.Gson
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.cached.SharePref
 import techlab.ai.hackathon.common.load
+import techlab.ai.hackathon.common.pushdown.PushDownAnim
 import techlab.ai.hackathon.data.model.NewFeed
 import techlab.ai.hackathon.data.model.UserModel
 import techlab.ai.hackathon.databinding.ActivityMainBinding
 import techlab.ai.hackathon.ui.base.BaseActivity
+import techlab.ai.hackathon.ui.funshop.FunShopActivity
 import techlab.ai.hackathon.ui.login.LoginDialog
 import techlab.ai.hackathon.ui.main.adapter.NewFeedAdapter
 import techlab.ai.hackathon.ui.manager.AppLoginManager
@@ -63,6 +65,10 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener {
                 binding.refreshLayout.isRefreshing = false
             }, 1000)
             onRefresh()
+        }
+
+        PushDownAnim.setPushDownAnimTo(binding.btnFunShop).setOnClickListener {
+            FunShopActivity.startSelf(this)
         }
         // Call Api
         onRefresh()
