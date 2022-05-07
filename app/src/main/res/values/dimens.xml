@@ -261,5 +261,8 @@
     <dimen name="dp_400">400dp</dimen>
     <dimen name="dp_450">450dp</dimen>
     <dimen name="sp_10">10sp</dimen>
+    <dimen name="dp_29">29dp</dimen>
+    <dimen name="dp_168">168dp</dimen>
+    <dimen name="dp_118">118dp</dimen>
 
 </resources>

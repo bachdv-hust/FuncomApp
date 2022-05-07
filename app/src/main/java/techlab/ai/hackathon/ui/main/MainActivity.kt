@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.cached.SharePref
 import techlab.ai.hackathon.common.toast.AppToast
@@ -14,6 +15,7 @@ import techlab.ai.hackathon.common.toast.ToastStyle
 import techlab.ai.hackathon.data.model.DemoModel
 import techlab.ai.hackathon.databinding.ActivityMainBinding
 import techlab.ai.hackathon.ui.base.BaseActivity
+import techlab.ai.hackathon.ui.main.adapter.NewFeedAdapter
 
 class MainActivity : BaseActivity(), MainView {
 
@@ -35,13 +37,11 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun afterCreatedView() {
         mainController = MainController(this,this)
-        SharePref.userName="bachdv"
-        mainController.callApi()
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (SharePref.userName=="bachdv"){
-                AppToast.createToast(ToastStyle.DONE).setText("adasdasdasd").show(this)
-            }
-        },3000)
+
+        binding.rvList.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = NewFeedAdapter()
+        }
     }
 
     override fun callBack(model: DemoModel) {
