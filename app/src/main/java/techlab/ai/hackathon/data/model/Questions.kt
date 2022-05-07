@@ -1,6 +1,7 @@
 package techlab.ai.hackathon.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class Questions(
@@ -9,4 +10,4 @@ data class Questions(
     @SerializedName("correct") var correct: String? = null,
     @SerializedName("question") var question: String? = null
 
-)
+) : Serializable

@@ -1,6 +1,7 @@
 package techlab.ai.hackathon.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class UserJoin(
@@ -12,4 +13,4 @@ data class UserJoin(
     @SerializedName("updated_at") var updatedAt: String? = null,
 
 
-)
+) : Serializable

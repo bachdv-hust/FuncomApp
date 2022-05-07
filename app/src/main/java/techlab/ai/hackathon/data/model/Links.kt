@@ -1,6 +1,7 @@
 package techlab.ai.hackathon.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class Links(
@@ -9,4 +10,4 @@ data class Links(
     @SerializedName("link") var link: String? = null,
 
 
-)
+) : Serializable

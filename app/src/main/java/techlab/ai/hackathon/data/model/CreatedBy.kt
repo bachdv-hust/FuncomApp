@@ -1,6 +1,7 @@
 package techlab.ai.hackathon.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class CreatedBy(
@@ -11,4 +12,4 @@ data class CreatedBy(
     @SerializedName("last_name") var lastName: String? = null,
     @SerializedName("avatar") var avatar: String? = null
 
-)
+) : Serializable
