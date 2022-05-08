@@ -106,12 +106,6 @@ class MultiChoiceActivity : BaseActivity() {
                 }
             }
         }
-//        rcv?.post(object : Runnable{
-//            override fun run() {
-//                listQuestionData?.let { adapter.setResult(it) }
-//            }
-//
-//        })
         return listQuestionData
     }
 
