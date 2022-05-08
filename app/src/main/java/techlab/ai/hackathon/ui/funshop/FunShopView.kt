@@ -7,4 +7,5 @@ import techlab.ai.hackathon.data.model.ShopPackage
  */
 interface FunShopView {
     fun onResultPackage(packages :List<ShopPackage>)
+    fun getPackageFail()
 }

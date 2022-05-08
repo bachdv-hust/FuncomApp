@@ -56,4 +56,7 @@ interface ApiInterface {
 
     @GET("shops")
     fun getShopPackage(): Observable<BaseListResponse<ShopPackage>>
+
+    @GET("users/info")
+    fun getInfo(): Observable<BaseResponse<UserModel>>
 }

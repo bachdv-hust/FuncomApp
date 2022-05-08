@@ -10,6 +10,8 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import techlab.ai.hackathon.cached.SharePref
+import techlab.ai.hackathon.common.toast.AppToast
+import techlab.ai.hackathon.common.toast.ToastStyle
 import techlab.ai.hackathon.data.model.ShopPackage
 import techlab.ai.hackathon.data.model.UserModel
 import techlab.ai.hackathon.databinding.ActivityFunShopBinding
@@ -63,5 +65,17 @@ class FunShopActivity : BaseActivity(),FunShopView {
     override fun onResultPackage(packages: List<ShopPackage>) {
         funShopAdapter.listData = packages
         hideDialog()
+    }
+
+    override fun getPackageFail() {
+        hideDialog()
+        AppToast.createToast(ToastStyle.ERROR).setText("Có lỗi xảy ra!").show(this)
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        hideDialog()
+        funShopController.clear()
     }
 }

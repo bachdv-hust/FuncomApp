@@ -29,6 +29,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected open fun hideDialog() {
         dialog?.hide()
+        dialog = null
     }
 
     protected open fun showDialog() {

@@ -87,6 +87,15 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener , CoinChange
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (SharePref.isLogin){
+            try {
+                mainController.getInfo()
+            } catch (e: Exception) {
+            }
+        }
+    }
     private fun updateUI() {
         val userString = SharePref.userModel
         if (userString.isNotEmpty() && SharePref.isLogin) {
