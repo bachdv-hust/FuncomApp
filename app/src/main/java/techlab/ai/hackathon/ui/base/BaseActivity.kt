@@ -48,7 +48,7 @@ abstract class BaseActivity : AppCompatActivity() {
         var result = 0
         val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
         if (resourceId > 0) {
-            result = resources.getDimensionPixelSize(resourceId)
+            result = resources.getDimensionPixelSize(resourceId)+12
         }
         return result
     }

@@ -258,6 +258,9 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
                     val viewDonors =
                         LayoutInflater.from(this)
                             .inflate(R.layout.item_donors, binding.contentBody.llDonors, false)
+                    viewDonors.setOnClickListener {
+                        donor.link?.openWebUrl(this)
+                    }
                     val vDonor = ItemDonorsBinding.bind(viewDonors)
                     vDonor.ivUserAvatar.load(url = donor.icon)
                     vDonor.tvDonors.text = donor.name
