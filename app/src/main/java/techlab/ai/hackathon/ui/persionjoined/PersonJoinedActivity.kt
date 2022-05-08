@@ -54,9 +54,9 @@ class PersonJoinedActivity : BaseActivity() {
             } else {
                 val percentRemain = (remainingFunCoin / totalFunCoin) * 100
                 binding.progressCoin.setMaxProgress(totalFunCoin)
-                binding.progressCoin.setProgress(remainingFunCoin)
+                binding.progressCoin.setProgress(totalFunCoin - remainingFunCoin)
             }
-            binding.tvCoinCirculating.text = remainingFunCoin.toString()
+            binding.tvCoinCirculating.text = (totalFunCoin - remainingFunCoin).toString()
             binding.tvCoinTotal.text = totalFunCoin.toString()
         }
     }

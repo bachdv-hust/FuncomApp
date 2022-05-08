@@ -217,13 +217,14 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
             }
 
             val receiveFunCoin = eventDetail.receiveFunCoin ?: 0
+            val remainingFunCoin = eventDetail.remainingFunCoin ?: 0
             val totalFunCoin = eventDetail.totalFunCoin ?: 0
             if (totalFunCoin <= 0) {
                 binding.contentBody.progressCoin.setProgress(0)
             } else {
 //                val percentRemain = (receiveFunCoin / totalFunCoin) * 100
                 binding.contentBody.progressCoin.setMaxProgress(totalFunCoin)
-                binding.contentBody.progressCoin.setProgress(receiveFunCoin)
+                binding.contentBody.progressCoin.setProgress(totalFunCoin- remainingFunCoin)
             }
             binding.contentBody.btnSeeMore.setOnClickListener {
                 ViewDescriptionActivity.startActivity(this, eventDetail.description!!)
@@ -237,7 +238,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
             binding.contentBody.tvViewMoreUserJoin.setOnClickListener {
                 PersonJoinedActivity.startActivity(this, eventDetail)
             }
-            binding.contentBody.tvCoinCirculating.text = receiveFunCoin.toString()
+            binding.contentBody.tvCoinCirculating.text = (totalFunCoin- remainingFunCoin).toString()
             binding.contentBody.tvCoinTotal.text = totalFunCoin.toString()
             binding.contentBody.tvEventDescription.loadHtml(eventDetail.description.toString())
             if (eventDetail.type == 2) {
@@ -368,7 +369,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
                     binding.btnJoin.text = "Số lượng coin đã hết"
                 } else {
                     binding.btnJoin.isEnabled = true
-                    binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_enable)
+                    binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_join_enable)
                     binding.btnJoin.text = "Tham gia ngay"
                 }
             }
