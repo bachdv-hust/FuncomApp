@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingBottom="@dimen/dp_20"
+    android:background="@drawable/background_dialog_result_question"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="@dimen/dp_168"
+        android:layout_height="@dimen/dp_168"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_download_app"
+        android:layout_marginTop="@dimen/dp_23"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tải ứng dụng, đánh giá và nhận thưởng"
+        android:layout_gravity="center"
+        android:textSize="@dimen/sp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        android:textColor="@color/Base_B500"
+        android:fontFamily="@font/inter_regular"/>
+    <TextView
+        android:id="@+id/btn_download_app"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/dp_23"
+        android:layout_marginEnd="@dimen/dp_23"
+        android:layout_height="wrap_content"
+        android:text="Tải Xuống ngay"
+        android:layout_gravity="center"
+        android:paddingBottom="@dimen/dp_12"
+        android:gravity="center"
+        android:paddingTop="@dimen/dp_12"
+        android:background="@drawable/background_btn_try"
+        android:textSize="@dimen/sp_16"
+        android:layout_marginTop="@dimen/dp_16"
+        android:textColor="@color/white"
+        android:fontFamily="@font/inter_regular"/>
+</LinearLayout>
