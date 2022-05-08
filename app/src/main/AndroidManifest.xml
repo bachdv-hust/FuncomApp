@@ -50,7 +50,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.event_detail.EventDetailActivity"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:label="@string/title_activity_event_detail"
             android:theme="@style/Theme.Hackathon.Fill" />
@@ -62,6 +62,7 @@
             android:screenOrientation="fullSensor"
             android:name=".ui.main.MainActivity"
             android:exported="true"
+            android:theme="@style/Theme.Hackathon.Fill"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

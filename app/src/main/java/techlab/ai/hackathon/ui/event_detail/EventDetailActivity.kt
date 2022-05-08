@@ -62,8 +62,6 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
     }
 
     override fun afterCreatedView() {
-        setContentView(binding.root)
-
         setSupportActionBar(findViewById(R.id.toolbar))
         multichoiceController = MultichoiceController(this)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, windowInsets ->

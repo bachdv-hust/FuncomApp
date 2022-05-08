@@ -270,5 +270,6 @@
     <dimen name="dp_38">39dp</dimen>
     <dimen name="dp_79">79dp</dimen>
     <dimen name="dp_68">68dp</dimen>
+    <dimen name="dp_94">94dp</dimen>
 
 </resources>
