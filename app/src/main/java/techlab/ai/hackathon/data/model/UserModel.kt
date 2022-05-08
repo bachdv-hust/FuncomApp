@@ -1,11 +1,12 @@
 package techlab.ai.hackathon.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 /**
  * @author BachDV
  */
-class UserModel {
+class UserModel : Serializable {
     @SerializedName("id")
     var id: Long = 0
 
