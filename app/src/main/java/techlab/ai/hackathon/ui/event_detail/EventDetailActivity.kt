@@ -3,9 +3,12 @@ package techlab.ai.hackathon.ui.event_detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.FrameLayout
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.appbar.AppBarLayout
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.cached.SharePref
@@ -20,6 +23,7 @@ import techlab.ai.hackathon.databinding.*
 import techlab.ai.hackathon.share_ui.avatagen.AvatarGenerator
 import techlab.ai.hackathon.ui.base.BaseActivity
 import techlab.ai.hackathon.ui.comment.CommentActivity
+import techlab.ai.hackathon.ui.downloadapp.DialogDownloadApp
 import techlab.ai.hackathon.ui.login.LoginDialog
 import techlab.ai.hackathon.ui.multi_choice.MultiChoiceActivity
 import techlab.ai.hackathon.ui.persionjoined.PersonJoinedActivity
@@ -52,6 +56,19 @@ class EventDetailActivity : BaseActivity(), EventDetailView {
         setContentView(binding.root)
 
         setSupportActionBar(findViewById(R.id.toolbar))
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures())
+            // Apply the insets as padding to the view. Here we're setting all of the
+            // dimensions, but apply as appropriate to your layout. You could also
+            // update the views margin if more appropriate.
+            Log.d("insets.top=", insets.top.toString())
+            val params = binding.toolbar.layoutParams as FrameLayout.LayoutParams
+            params.setMargins(0, insets.top, 0, 0)
+            binding.toolbar.layoutParams = params
+            // Return CONSUMED if we don't want the window insets to keep being passed
+            // down to descendant views.
+            WindowInsetsCompat.CONSUMED
+        }
         binding.toolbarLayout.title = title
         binding.btnBack.setOnClickListener {
             finish()
@@ -110,16 +127,20 @@ class EventDetailActivity : BaseActivity(), EventDetailView {
                 SharePref.setEventCached(eventDetail.id!!, false)
                 checkStateJoin(eventDetail)
             } else {
-                //tham gia
-                if (eventDetail.type == 1) {
-                    var intent = Intent(this, MultiChoiceActivity::class.java)
-                    var bundle = Bundle()
-                    bundle.putSerializable("data", eventDetail)
-                    intent.putExtras(bundle)
-                    startActivity(intent)
+                when(eventDetail.type) {
+                    1 -> {
+                        val intent = Intent(this, MultiChoiceActivity::class.java)
+                        val bundle = Bundle()
+                        bundle.putSerializable("data", eventDetail)
+                        intent.putExtras(bundle)
+                        startActivity(intent)
+                    }
+                    2 -> {
+                        DialogDownloadApp.newInstance("",eventDetail.id ?: 0,eventDetail.receiveFunCoin?:0)
+                        SharePref.setEventCached(eventDetail.id!!, true)
+                        checkStateJoin(eventDetail)
+                    }
                 }
-                SharePref.setEventCached(eventDetail.id!!, true)
-                checkStateJoin(eventDetail)
             }
 
         }
@@ -133,8 +154,13 @@ class EventDetailActivity : BaseActivity(), EventDetailView {
             binding.contentBody.tvDateTime.text =
                 "${eventDetail.startDate} to ${eventDetail.endDate}"
             binding.contentBody.tvEventTitle.text = eventDetail.title
-            binding.contentBody.tvCreateBy.text = "Tạo bởi ${eventDetail.createdBy?.username ?: ""}"
-            val receiveFunCoin = eventDetail.remainingFunCoin ?: 0
+            eventDetail.createdBy?.let {
+                binding.contentBody.tvCreateBy.text = "Tạo bởi ${it.username}"
+            } ?: kotlin.run {
+                binding.contentBody.tvCreateBy.visibility = View.GONE
+            }
+
+            val receiveFunCoin = eventDetail.receiveFunCoin ?: 0
             val totalFunCoin = eventDetail.totalFunCoin ?: 0
             if (totalFunCoin <= 0) {
                 binding.contentBody.progressCoin.setProgress(0)

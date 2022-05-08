@@ -50,7 +50,7 @@ interface ApiInterface {
     ): Observable<BaseResponse<Any>>
 
     @FormUrlEncoded
-    @POST("/events/user-joined")
+    @POST("events/user-joined")
     fun joinEvent(@Field("event_id") eventId: Long) : Observable<BaseResponse<Any>>
 
 
