@@ -16,11 +16,9 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.ui.multi_choice.MultichoiceController
-import techlab.ai.hackathon.ui.multi_choice.MultichoiceView
-import techlab.ai.hackathon.ui.multi_choice.ResultQuestionDialogSuccess
 
 
-class DialogDownloadApp : DialogFragment() , MultichoiceView{
+class DialogDownloadApp : DialogFragment() {
     private lateinit var btn_download : TextView
     private var packageNme : String = ""
     private var isDownload : Boolean = false
@@ -42,7 +40,7 @@ class DialogDownloadApp : DialogFragment() , MultichoiceView{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.apply {
-            packageNme = getString("packageNme") as String
+            packageNme = getString("packageName") as String
             eventId = getInt("eventId") as Int
             score = getInt("score") as Int
         }
@@ -53,7 +51,7 @@ class DialogDownloadApp : DialogFragment() , MultichoiceView{
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.dialog_download_app, container)
+        val view = inflater.inflate(R.layout.dialog_download_app, container)
         if (getDialog() != null && getDialog()?.getWindow() != null) {
             getDialog()?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
             getDialog()?.getWindow()?.requestFeature(Window.FEATURE_NO_TITLE);
@@ -63,28 +61,16 @@ class DialogDownloadApp : DialogFragment() , MultichoiceView{
     }
 
     private fun initView(view: View) {
-        multichoiceController = MultichoiceController(this)
         btn_download = view.findViewById(R.id.btn_download_app)
         btn_download.setOnClickListener {
-            if (!isDownload) {
-                openStore(packageNme)
-            } else {
-                if (checkIsDownload(packageNme)) {
-                    multichoiceController?.joinEvent(eventId.toLong())
-                } else {
-                    btn_download.text = "Tải app ngay"
-                    isDownload = false
-                }
-            }
-
+            openStore(packageNme)
         }
     }
 
     fun openStore(packageName : String) {
         try {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
-            btn_download.text = "Hoàn thành"
-            isDownload = true
+            dismiss()
         } catch (e: ActivityNotFoundException) {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName")))
         }
@@ -99,14 +85,5 @@ class DialogDownloadApp : DialogFragment() , MultichoiceView{
         } catch (e: PackageManager.NameNotFoundException) {
         }
         return false
-    }
-
-    override fun joinEventSuccess(message: String) {
-        dismiss()
-        ResultQuestionDialogSuccess().newInstance(score.toDouble())
-    }
-
-    override fun joinEventFail(message: String) {
-
     }
 }

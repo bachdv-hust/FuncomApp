@@ -13,9 +13,10 @@
         android:layout_marginTop="@dimen/dp_23"/>
     <TextView
         android:layout_width="wrap_content"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:text="Tải ứng dụng, đánh giá và nhận thưởng"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:textSize="@dimen/sp_16"
         android:layout_marginTop="@dimen/dp_16"
         android:textColor="@color/Base_B500"
