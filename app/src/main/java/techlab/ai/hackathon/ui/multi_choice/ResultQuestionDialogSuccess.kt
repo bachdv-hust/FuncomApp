@@ -23,6 +23,7 @@ class ResultQuestionDialogSuccess() : DialogFragment() {
         val args = Bundle()
         args.putDouble("data", score)
         frag.setArguments(args)
+        frag.isCancelable = false
         return frag
     }
 
