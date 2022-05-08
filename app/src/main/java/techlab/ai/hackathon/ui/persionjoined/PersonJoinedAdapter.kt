@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import techlab.ai.hackathon.common.coinFormat
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.data.model.UserJoin
 import techlab.ai.hackathon.databinding.ItemUserJoinedBinding
@@ -55,6 +56,6 @@ class PersonJoinedViewHolder(private val binding: ItemUserJoinedBinding) :
             )
         }
         binding.tvUserName.text = user.user?.nameDisplay()
-        binding.tvCoin.text = "+${user.coin}"
+        binding.tvCoin.text = "+${user.coin?.toDouble()?.coinFormat()?:0}"
     }
 }

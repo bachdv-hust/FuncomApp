@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.appbar.AppBarLayout
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.cached.SharePref
+import techlab.ai.hackathon.common.coinFormat
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.loadHtml
 import techlab.ai.hackathon.common.openWebUrl
@@ -124,7 +125,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
     }
 
     private fun initEvent(eventDetail: EventDetail) {
-        binding.btnJoin.setOnClickListener {
+        PushDownAnim.setPushDownAnimTo(binding.btnJoin).setOnClickListener {
             if(!validateLogin()){
                 return@setOnClickListener
             }
@@ -238,8 +239,8 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
             binding.contentBody.tvViewMoreUserJoin.setOnClickListener {
                 PersonJoinedActivity.startActivity(this, eventDetail)
             }
-            binding.contentBody.tvCoinCirculating.text = (totalFunCoin- remainingFunCoin).toString()
-            binding.contentBody.tvCoinTotal.text = totalFunCoin.toString()
+            binding.contentBody.tvCoinCirculating.text = (totalFunCoin- remainingFunCoin).coinFormat()
+            binding.contentBody.tvCoinTotal.text = totalFunCoin.coinFormat()
             binding.contentBody.tvEventDescription.loadHtml(eventDetail.description.toString())
             if (eventDetail.type == 2) {
                 binding.contentBody.ctnDownload.visibility = View.VISIBLE
@@ -258,7 +259,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
                     val viewDonors =
                         LayoutInflater.from(this)
                             .inflate(R.layout.item_donors, binding.contentBody.llDonors, false)
-                    viewDonors.setOnClickListener {
+                    PushDownAnim.setPushDownAnimTo(viewDonors).setOnClickListener {
                         donor.link?.openWebUrl(this)
                     }
                     val vDonor = ItemDonorsBinding.bind(viewDonors)
@@ -325,7 +326,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
                         LayoutInflater.from(this)
                             .inflate(R.layout.item_links, binding.contentBody.llLinks, false)
                     val vLinks = ItemLinksBinding.bind(viewLinks)
-                    viewLinks.setOnClickListener {
+                    PushDownAnim.setPushDownAnimTo(viewLinks).setOnClickListener {
                         link.link?.openWebUrl(this)
                     }
                     vLinks.tvLink.text = link.name

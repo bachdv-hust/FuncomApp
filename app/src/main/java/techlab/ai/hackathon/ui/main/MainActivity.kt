@@ -213,7 +213,7 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener, CoinChangeL
     }
 
     override fun onChange(totalCoin: Float) {
-        binding.tvTotalCoin.text = totalCoin.toString()
+        binding.tvTotalCoin.text = totalCoin.coinFormat()
     }
 
 

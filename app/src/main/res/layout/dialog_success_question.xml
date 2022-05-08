@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/background_dialog_result_question"
-    android:paddingBottom="@dimen/dp_20"
-    android:layout_height="wrap_content">
+    android:paddingBottom="@dimen/dp_20">
+
     <ImageView
         android:id="@+id/imv_success"
         android:layout_width="@dimen/dp_90"
         android:layout_height="@dimen/dp_90"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_30"
-        android:background="@drawable/ic_success_question"/>
+        android:background="@drawable/ic_success_question" />
 
     <TextView
         android:id="@+id/tv_coin"
