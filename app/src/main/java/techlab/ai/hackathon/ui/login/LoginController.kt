@@ -25,10 +25,12 @@ class LoginController(private val loginView: LoginView) : BaseController() {
                             LoginUtil.setLogin(model)
 
                         }
+                        if (it.isFail()){
+                            loginView.registerFail(it.message.toString())
+                        }
                     }, {
                         it.printStackTrace()
                         LoginUtil.setLogout()
-                        loginView.registerFail(it.message.toString())
                     }
                 ))
     }
@@ -44,6 +46,9 @@ class LoginController(private val loginView: LoginView) : BaseController() {
                         it.data?.let { model ->
                             LoginUtil.setLogin(model)
                             loginView.loginSuccess(model)
+                        }
+                        if (it.isFail() ){
+                            loginView.loginFail("")
                         }
                     }, {
                         it.printStackTrace()

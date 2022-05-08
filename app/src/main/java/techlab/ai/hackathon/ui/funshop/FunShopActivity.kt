@@ -14,6 +14,7 @@ import techlab.ai.hackathon.data.model.ShopPackage
 import techlab.ai.hackathon.data.model.UserModel
 import techlab.ai.hackathon.databinding.ActivityFunShopBinding
 import techlab.ai.hackathon.ui.base.BaseActivity
+import techlab.ai.hackathon.ui.manager.CoinUtil
 
 class FunShopActivity : BaseActivity(),FunShopView {
 
@@ -47,10 +48,7 @@ class FunShopActivity : BaseActivity(),FunShopView {
             layoutManager = LinearLayoutManager(this@FunShopActivity)
             adapter = funShopAdapter
         }
-        if (SharePref.userModel.isNotEmpty()){
-            val user = Gson().fromJson(SharePref.userModel,UserModel::class.java)
-            binding.tvTotalCoin.text = user.totalCoin.toInt().toString()
-        }
+        binding.tvTotalCoin.text = CoinUtil.getCurrentCoin().toString()
         binding.btnBack.setOnClickListener {
             finish()
         }

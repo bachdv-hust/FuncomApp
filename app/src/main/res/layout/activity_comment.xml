@@ -40,15 +40,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_1"
                 android:background="#FAFAFA" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvList"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
-                android:paddingTop="@dimen/dp_8" />
+                android:layout_weight="1">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:paddingTop="@dimen/dp_8" />
+
+                <TextView
+                    android:id="@+id/tvEmpty"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/inter_semi_bold"
+                    android:text="Chưa có bình luận nào"
+                    android:layout_gravity="center"
+                    />
+                <ProgressBar
+                    android:id="@+id/loadingView"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="@dimen/dp_60"/>
+            </FrameLayout>
+
 
 
         </LinearLayout>

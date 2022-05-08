@@ -12,16 +12,21 @@ import techlab.ai.hackathon.cached.SharePref
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.loadHtml
 import techlab.ai.hackathon.common.openWebUrl
+import techlab.ai.hackathon.common.pushdown.PushDownAnim
+import techlab.ai.hackathon.common.toast.AppToast
+import techlab.ai.hackathon.common.toast.ToastStyle
 import techlab.ai.hackathon.data.model.EventDetail
 import techlab.ai.hackathon.databinding.*
 import techlab.ai.hackathon.share_ui.avatagen.AvatarGenerator
+import techlab.ai.hackathon.ui.base.BaseActivity
 import techlab.ai.hackathon.ui.comment.CommentActivity
+import techlab.ai.hackathon.ui.login.LoginDialog
 import techlab.ai.hackathon.ui.multi_choice.MultiChoiceActivity
 import techlab.ai.hackathon.ui.persionjoined.PersonJoinedActivity
 import techlab.ai.hackathon.ui.view_descript.ViewDescriptionActivity
 import kotlin.math.abs
 
-class EventDetailActivity : AppCompatActivity(), EventDetailView {
+class EventDetailActivity : BaseActivity(), EventDetailView {
 
     companion object {
         fun startActivity(context: Context, eventId: String, userId: String) {
@@ -37,10 +42,13 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
         EventDetailController(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
+    override fun initBindingView(): View {
         binding = ActivityEventDetailBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun afterCreatedView() {
         setContentView(binding.root)
 
         setSupportActionBar(findViewById(R.id.toolbar))
@@ -71,11 +79,28 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
             startActivity(shareIntent)
         }
         binding.btnComment.setOnClickListener {
-            CommentActivity.startSelf(this, eventId?.toLong() ?: -1)
+            if (validateLogin()) {
+                CommentActivity.startSelf(this, eventId?.toLong() ?: -1)
+            }
         }
-
+        PushDownAnim.setPushDownAnimTo(binding.contentBody.ctnDownload).setOnClickListener {
+            val dialog = DownLoadAppDialog.show(supportFragmentManager)
+            dialog.callBack = object : DownloadDialogCallBack {
+                override fun oncClickDownLoadBtn() {
+                    // TODO
+                }
+            }
+        }
         eventId?.let { userId?.let { it1 -> eventController.getEventDetail(it, it1) } }
+    }
 
+    private fun validateLogin(): Boolean {
+        return if (SharePref.isLogin) {
+            true
+        } else {
+            LoginDialog.show(supportFragmentManager)
+            false
+        }
     }
 
     fun initEvent(eventDetail: EventDetail) {
@@ -86,10 +111,10 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
                 checkStateJoin(eventDetail)
             } else {
                 //tham gia
-                if (eventDetail.type==1) {
-                    var intent = Intent(this,MultiChoiceActivity::class.java)
+                if (eventDetail.type == 1) {
+                    var intent = Intent(this, MultiChoiceActivity::class.java)
                     var bundle = Bundle()
-                    bundle.putSerializable("data",eventDetail)
+                    bundle.putSerializable("data", eventDetail)
                     intent.putExtras(bundle)
                     startActivity(intent)
                 }
@@ -109,7 +134,7 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
                 "${eventDetail.startDate} to ${eventDetail.endDate}"
             binding.contentBody.tvEventTitle.text = eventDetail.title
             binding.contentBody.tvCreateBy.text = "Tạo bởi ${eventDetail.createdBy?.username ?: ""}"
-            val receiveFunCoin = eventDetail.receiveFunCoin ?: 0
+            val receiveFunCoin = eventDetail.remainingFunCoin ?: 0
             val totalFunCoin = eventDetail.totalFunCoin ?: 0
             if (totalFunCoin <= 0) {
                 binding.contentBody.progressCoin.setProgress(0)
@@ -125,6 +150,9 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
                 ViewDescriptionActivity.startActivity(this, eventDetail.description!!)
             }
             binding.contentBody.headerUserJoin.setOnClickListener {
+                PersonJoinedActivity.startActivity(this, eventDetail)
+            }
+            binding.contentBody.tvViewMoreUserJoin.setOnClickListener {
                 PersonJoinedActivity.startActivity(this, eventDetail)
             }
             binding.contentBody.tvCoinCirculating.text = receiveFunCoin.toString()
@@ -160,7 +188,9 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
             //da tham gia
             if (!eventDetail.userJoined.isNullOrEmpty()) {
                 binding.contentBody.headerUserJoin.setText("${eventDetail.userJoined.size} người đã tham gia")
+                var count = 0;
                 for (user in eventDetail.userJoined) {
+                    if (count >= 3) break
                     val viewUsers =
                         LayoutInflater.from(this)
                             .inflate(
@@ -182,6 +212,7 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
                     vUsers.tvUserName.text = user.user?.nameDisplay()
                     vUsers.tvCoin.text = "+${user.coin}"
                     binding.contentBody.llUsersJoin.addView(viewUsers)
+                    count++
                 }
             } else {
                 binding.contentBody.llUsersJoin.visibility = View.GONE
@@ -222,7 +253,12 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+        hideDialog()
+    }
 
+    override fun loadEventFail() {
+        hideDialog()
+        AppToast.createToast(ToastStyle.ERROR).setText("Có lỗi xảy ra!").show(this)
     }
 
     private fun checkStateJoin(eventDetail: EventDetail) {

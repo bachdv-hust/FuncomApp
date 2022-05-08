@@ -12,50 +12,60 @@
         android:layout_height="match_parent"
         android:orientation="vertical" />
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_200"
-        android:background="@drawable/bg_cmt_bottom_sheet"
-        android:orientation="vertical">
+        android:background="@drawable/bg_cmt_bottom_sheet">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_46">
+            android:layout_height="match_parent"
+            android:layout_above="@+id/textBoxView"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/inter_semi_bold"
-                android:text="Thảo luận"
-                android:textColor="#000000"
-                android:textSize="@dimen/sp_16" />
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_46">
 
-        <View
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/inter_semi_bold"
+                    android:text="Thảo luận"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/sp_16" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="#FAFAFA" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvList"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingTop="@dimen/dp_8" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="#F8F8F8" />
+
+
+        </LinearLayout>
+
+        <techlab.ai.hackathon.share_ui.TextBoxView
+            android:id="@+id/textBoxView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"
-            android:background="#FAFAFA" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvList"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:clipToPadding="false"
-            android:overScrollMode="never"
-            android:paddingTop="@dimen/dp_8" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"
-            android:background="#F8F8F8" />
-
-       <techlab.ai.hackathon.share_ui.TextBoxView
-           android:id="@+id/textBoxView"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 
 </FrameLayout>

@@ -21,6 +21,7 @@ class EventDetailController(private val eventDetailView: EventDetailView) : Base
                         }
                     }, {
                         it.printStackTrace()
+                        eventDetailView.loadEventFail()
                     }
                 )
         )

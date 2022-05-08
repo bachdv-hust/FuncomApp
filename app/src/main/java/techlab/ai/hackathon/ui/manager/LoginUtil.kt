@@ -8,18 +8,22 @@ import techlab.ai.hackathon.data.model.UserModel
  * @author BachDV
  */
 class LoginUtil {
-    companion object{
+    companion object {
 
-        fun setLogin(userModel: UserModel){
+        fun setLogin(userModel: UserModel) {
             SharePref.userModel = Gson().toJson(userModel)
+            CoinUtil.updateCoin(userModel.totalCoin)
             SharePref.isLogin = true
             AppLoginManager.isLogged = true
-            SharePref.token = userModel.token?:""
+            SharePref.token = userModel.token ?: ""
         }
 
-        fun setLogout(){
+        fun setLogout() {
+            SharePref.userModel = ""
+            CoinUtil.updateCoin(0f)
             SharePref.isLogin = false
             AppLoginManager.isLogged = false
+            SharePref.token = ""
         }
     }
 }

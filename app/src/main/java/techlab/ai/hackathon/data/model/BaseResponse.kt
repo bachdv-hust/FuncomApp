@@ -6,8 +6,8 @@ import com.google.gson.annotations.SerializedName
  * @author BachDV
  */
 class BaseResponse<T>(
-    @SerializedName("status_code")
-    val status_code: Int,
+    @SerializedName("code")
+    val code: Int =0 ,
     @SerializedName("status")
     val status: Int,
     @SerializedName("message")
@@ -15,5 +15,7 @@ class BaseResponse<T>(
     @SerializedName("data")
     val data: T?
 ) {
-    fun isSuccess(): Boolean = status_code == 200
+    fun isFail(): Boolean {
+        return code != 200 && code!=0
+    }
 }

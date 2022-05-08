@@ -157,7 +157,7 @@ class LoginDialog : BaseDialogFragment(), LoginView {
 
     override fun registerFail(message: String) {
         hideDialog()
-        AppToast.createToast(ToastStyle.ERROR).setText(message).show(requireContext())
+        AppToast.createToast(ToastStyle.ERROR).setText("Đăng ký thất bại!").show(requireContext())
     }
 
     override fun loginSuccess(user: UserModel) {
@@ -171,7 +171,7 @@ class LoginDialog : BaseDialogFragment(), LoginView {
 
     override fun loginFail(message: String) {
         hideDialog()
-        AppToast.createToast(ToastStyle.ERROR).setText(message).show(requireContext())
+        AppToast.createToast(ToastStyle.ERROR).setText("Đăng nhập thất bại!").show(requireContext())
     }
 
 }

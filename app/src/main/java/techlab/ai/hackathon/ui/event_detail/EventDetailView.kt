@@ -10,4 +10,7 @@ import techlab.ai.hackathon.data.model.NewFeed
 interface EventDetailView {
 
     fun onEventDetailResult(eventDetail: EventDetail)
+
+    fun loadEventFail()
+
 }
