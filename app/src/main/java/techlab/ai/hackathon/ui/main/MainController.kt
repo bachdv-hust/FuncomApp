@@ -14,14 +14,14 @@ import techlab.ai.hackathon.ui.manager.LoginUtil
  */
 class MainController(private val mainView: MainView) : BaseController() {
 
-    fun refreshDataNewFeed(){
+    fun refreshDataNewFeed(userId: Long? = null, tagId: Long? = null) {
         addDisposable(
-            retrofit.getDataNewFeed()
+            retrofit.getDataNewFeed(tagId, userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     {
-                        it.data?.let {model->
+                        it.data?.let { model ->
                             mainView.onNewFeedsResult(model)
                         }
                     }, {
@@ -32,19 +32,38 @@ class MainController(private val mainView: MainView) : BaseController() {
         )
     }
 
-    fun getInfo(){
+    fun getInfo() {
         addDisposable(
             retrofit.getInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     {
-                        it.data?.let {model->
+                        it.data?.let { model ->
                             SharePref.userModel = Gson().toJson(model)
                             CoinUtil.updateCoin(model.totalCoin)
                         }
                     }, {
                         it.printStackTrace()
+                        mainView.onFail()
+                    }
+                )
+        )
+    }
+
+    fun getMenu() {
+        addDisposable(
+            retrofit.getMenus()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        it.data?.let { model ->
+                            mainView.onMenuResult(model)
+                        }
+                    }, {
+                        it.printStackTrace()
+                        mainView.onMenuFail()
                     }
                 )
         )

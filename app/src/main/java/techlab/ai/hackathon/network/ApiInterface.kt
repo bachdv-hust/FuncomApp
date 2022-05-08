@@ -14,7 +14,10 @@ interface ApiInterface {
     fun getDemo(): Observable<BaseResponse<DemoModel>>
 
     @GET("events")
-    fun getDataNewFeed(): Observable<BaseListResponse<NewFeed>>
+    fun getDataNewFeed(
+        @Query("tag_id") tagId :Long?=null,
+        @Query("user_id") userId : Long?= null
+    ): Observable<BaseListResponse<NewFeed>>
 
     @GET("events/{eventId}")
     fun getEventDetail(
@@ -59,4 +62,7 @@ interface ApiInterface {
 
     @GET("users/info")
     fun getInfo(): Observable<BaseResponse<UserModel>>
+
+    @GET("tags")
+    fun getMenus() : Observable<BaseListResponse<FeedMenuModel>>
 }
