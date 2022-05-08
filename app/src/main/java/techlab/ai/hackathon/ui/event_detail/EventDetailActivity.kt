@@ -128,8 +128,8 @@ class EventDetailActivity : BaseActivity(), EventDetailView {
             } else {
                 //tham gia
                 if (eventDetail.type == 1) {
-                    var intent = Intent(this, MultiChoiceActivity::class.java)
-                    var bundle = Bundle()
+                    val intent = Intent(this, MultiChoiceActivity::class.java)
+                    val bundle = Bundle()
                     bundle.putSerializable("data", eventDetail)
                     intent.putExtras(bundle)
                     startActivity(intent)
