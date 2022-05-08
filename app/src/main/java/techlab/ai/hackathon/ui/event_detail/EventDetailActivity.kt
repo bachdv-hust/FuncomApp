@@ -1,7 +1,9 @@
 package techlab.ai.hackathon.ui.event_detail
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,11 +28,14 @@ import techlab.ai.hackathon.ui.comment.CommentActivity
 import techlab.ai.hackathon.ui.downloadapp.DialogDownloadApp
 import techlab.ai.hackathon.ui.login.LoginDialog
 import techlab.ai.hackathon.ui.multi_choice.MultiChoiceActivity
+import techlab.ai.hackathon.ui.multi_choice.MultichoiceController
+import techlab.ai.hackathon.ui.multi_choice.MultichoiceView
+import techlab.ai.hackathon.ui.multi_choice.ResultQuestionDialogSuccess
 import techlab.ai.hackathon.ui.persionjoined.PersonJoinedActivity
 import techlab.ai.hackathon.ui.view_descript.ViewDescriptionActivity
 import kotlin.math.abs
 
-class EventDetailActivity : BaseActivity(), EventDetailView {
+class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
 
     companion object {
         fun startActivity(context: Context, eventId: String, userId: String) {
@@ -41,7 +46,11 @@ class EventDetailActivity : BaseActivity(), EventDetailView {
         }
     }
 
+    private var isDownloadApp : Boolean = false
+
     private lateinit var binding: ActivityEventDetailBinding
+    private var eventDetail : EventDetail? = null
+    private lateinit var multichoiceController: MultichoiceController
     private val eventController by lazy {
         EventDetailController(this)
     }
@@ -56,6 +65,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView {
         setContentView(binding.root)
 
         setSupportActionBar(findViewById(R.id.toolbar))
+        multichoiceController = MultichoiceController(this)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures())
             // Apply the insets as padding to the view. Here we're setting all of the
@@ -136,9 +146,10 @@ class EventDetailActivity : BaseActivity(), EventDetailView {
                         startActivity(intent)
                     }
                     2 -> {
-                        DialogDownloadApp.newInstance("",eventDetail.id ?: 0,eventDetail.receiveFunCoin?:0)
+                        DialogDownloadApp.newInstance("com.ffff.docbao24h",eventDetail.id ?: 0,eventDetail.receiveFunCoin?:0)?.show(supportFragmentManager,"DialogDownloadApp")
                         SharePref.setEventCached(eventDetail.id!!, true)
                         checkStateJoin(eventDetail)
+                        isDownloadApp = true
                     }
                 }
             }
@@ -146,8 +157,30 @@ class EventDetailActivity : BaseActivity(), EventDetailView {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (isDownloadApp) {
+            if (checkIsDownload("com.ffff.docbao24h")) {
+                eventDetail?.id?.let { it.toLong()
+                    .let { it1 -> multichoiceController.joinEvent(it1) } }
+            }
+        }
+    }
+
+    @SuppressLint("UseRequireInsteadOfGet")
+    fun checkIsDownload(uri : String) : Boolean {
+        val pm: PackageManager? = getPackageManager()
+        try {
+            pm?.getPackageInfo(uri, PackageManager.GET_ACTIVITIES)
+            return true
+        } catch (e: PackageManager.NameNotFoundException) {
+        }
+        return false
+    }
+
     override fun onEventDetailResult(eventDetail: EventDetail) {
         try {
+            this.eventDetail = eventDetail
             initEvent(eventDetail)
             binding.ivEventCover.load(url = eventDetail.thumbnailUrl)
             binding.tvTitleToolbar.text = eventDetail.title
@@ -301,6 +334,15 @@ class EventDetailActivity : BaseActivity(), EventDetailView {
             }
         }
 
+
+    }
+
+    override fun joinEventSuccess(message: String) {
+        eventDetail?.receiveFunCoin?.let { it.toDouble()
+            .let { it1 -> ResultQuestionDialogSuccess().newInstance(it1)?.show(supportFragmentManager,"ResultQuestionDialogSuccess") } }
+    }
+
+    override fun joinEventFail(message: String) {
 
     }
 }

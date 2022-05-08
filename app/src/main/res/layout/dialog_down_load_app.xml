@@ -16,9 +16,9 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_marginTop="@dimen/dp_26"
             android:layout_width="@dimen/dp_168"
             android:layout_height="@dimen/dp_168"
+            android:layout_marginTop="@dimen/dp_26"
             android:src="@drawable/ic_ch_play" />
 
         <TextView
@@ -43,8 +43,6 @@
             android:text="Tải xuống ngay"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_18" />
-
-
     </LinearLayout>
 
 </RelativeLayout>
