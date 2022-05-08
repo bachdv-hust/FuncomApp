@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.cached.SharePref
+import techlab.ai.hackathon.common.coinFormat
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.loadCorner
 import techlab.ai.hackathon.common.pushdown.PushDownAnim
@@ -57,7 +58,7 @@ class NewFeedViewHolder(private val binding: ItemNewFeedBinding) :
         try {
             binding.ivContent.loadCorner(url = item.thumbnailUrl, corner = binding.root.context.resources.getDimensionPixelOffset(R.dimen.dp_8))
             binding.tvTitle.text = item.title ?: ""
-            binding.tvTotalCoin.text = (item.totalFunCoin ?: 0).toInt().toString()
+            binding.tvTotalCoin.text = (item.totalFunCoin ?: 0).toInt().coinFormat()
             binding.tvJoined.visibility = if (item.isUserJoined) View.VISIBLE else View.GONE
             binding.tvEndTime.visibility = View.VISIBLE
             binding.tvPersonCount.text = "${item.userJoinedCount} người đã tham gia"

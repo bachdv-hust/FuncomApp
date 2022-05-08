@@ -201,8 +201,15 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
             initEvent(eventDetail)
             binding.ivEventCover.load(url = eventDetail.thumbnailUrl)
             binding.tvTitleToolbar.text = eventDetail.title
-            binding.contentBody.tvDateTime.text =
-                "${eventDetail.startDate} to ${eventDetail.endDate}"
+            try {
+                val dateFormat: Date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(eventDetail.startDate)
+                val dateFormat2: Date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(eventDetail.endDate)
+                val strDate: String = SimpleDateFormat("HH:mm dd/MM").format(dateFormat)
+                val endDate: String = SimpleDateFormat("HH:mm dd/MM/yyyy").format(dateFormat2)
+                binding.contentBody.tvDateTime.text =
+                    "${strDate} to ${endDate}"
+            } catch (e: Exception) {
+            }
             binding.contentBody.tvEventTitle.text = eventDetail.title
             eventDetail.createdBy?.let {
                 binding.contentBody.tvCreateBy.text = "Tạo bởi ${it.username}"

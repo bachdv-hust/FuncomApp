@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.cached.SharePref
+import techlab.ai.hackathon.common.coinFormat
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.pushdown.PushDownAnim
 import techlab.ai.hackathon.common.toast.AppToast
@@ -159,7 +160,7 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener, CoinChangeL
             binding.tvName.text = ""
             binding.ivAvatar.load(url = "", placeholder = R.drawable.ic_logo_funtap)
         }
-        binding.tvTotalCoin.text = CoinUtil.getCurrentCoin().toString()
+        binding.tvTotalCoin.text = CoinUtil.getCurrentCoin().coinFormat()
     }
 
     private fun onRefresh() {

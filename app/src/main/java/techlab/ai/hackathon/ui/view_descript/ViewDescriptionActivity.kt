@@ -7,7 +7,6 @@ import android.view.View
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import techlab.ai.hackathon.R
-import techlab.ai.hackathon.ui.event_detail.EventDetailActivity
 
 class ViewDescriptionActivity : AppCompatActivity() {
     companion object {
@@ -17,6 +16,7 @@ class ViewDescriptionActivity : AppCompatActivity() {
             context.startActivity(intent)
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_description)
