@@ -13,6 +13,7 @@ import techlab.ai.hackathon.cached.SharePref
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.loadCorner
 import techlab.ai.hackathon.common.pushdown.PushDownAnim
+import techlab.ai.hackathon.data.model.FeedMenuModel
 import techlab.ai.hackathon.data.model.NewFeed
 import techlab.ai.hackathon.data.model.UserModel
 import techlab.ai.hackathon.databinding.ItemNewFeedBinding
@@ -24,7 +25,7 @@ import java.util.*
 /**
  * @author BachDV
  */
-class NewFeedAdapter : RecyclerView.Adapter<NewFeedViewHolder>() {
+class NewFeedAdapter() : RecyclerView.Adapter<NewFeedViewHolder>() {
 
     var listData: List<NewFeed> = arrayListOf()
         @SuppressLint("NotifyDataSetChanged")
@@ -88,6 +89,14 @@ class NewFeedViewHolder(private val binding: ItemNewFeedBinding) :
             } ?: kotlin.run {
                 binding.tvEndTime.visibility = View.GONE
             }
+            try {
+                val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
+                val strStartDate: String = dateFormat.format(item.timeStart!!)
+                val strEndDate: String = dateFormat.format(item.timeEnd!!)
+                binding.tvEndTime.text = "Từ $strStartDate - Đến $strEndDate"
+            } catch (e: Exception) {
+            }
+
             binding.tvEndTime.background =
                 ContextCompat.getDrawable(binding.root.context, R.drawable.bg_tv_endtime)
         }
