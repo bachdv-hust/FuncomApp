@@ -8,7 +8,6 @@ import techlab.ai.hackathon.common.pushdown.PushDownAnim
 import techlab.ai.hackathon.databinding.DialogDownLoadAppBinding
 import techlab.ai.hackathon.ui.base.BaseDialogFragment
 
-
 class DownLoadAppDialog : BaseDialogFragment() {
 
     companion object {

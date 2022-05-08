@@ -53,7 +53,7 @@ class ResultQuestionDialogSuccess() : DialogFragment() {
         btn_give = view.findViewById(R.id.btn_give_coin)
         tv_coin?.text = score.toString() + "Funcoin"
         btn_give?.setOnClickListener {
-
+            activity?.finish()
         }
     }
 

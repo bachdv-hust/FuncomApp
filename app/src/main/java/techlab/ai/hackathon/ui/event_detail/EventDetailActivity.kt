@@ -23,6 +23,7 @@ import techlab.ai.hackathon.databinding.*
 import techlab.ai.hackathon.share_ui.avatagen.AvatarGenerator
 import techlab.ai.hackathon.ui.base.BaseActivity
 import techlab.ai.hackathon.ui.comment.CommentActivity
+import techlab.ai.hackathon.ui.downloadapp.DialogDownloadApp
 import techlab.ai.hackathon.ui.login.LoginDialog
 import techlab.ai.hackathon.ui.multi_choice.MultiChoiceActivity
 import techlab.ai.hackathon.ui.persionjoined.PersonJoinedActivity
@@ -126,16 +127,20 @@ class EventDetailActivity : BaseActivity(), EventDetailView {
                 SharePref.setEventCached(eventDetail.id!!, false)
                 checkStateJoin(eventDetail)
             } else {
-                //tham gia
-                if (eventDetail.type == 1) {
-                    val intent = Intent(this, MultiChoiceActivity::class.java)
-                    val bundle = Bundle()
-                    bundle.putSerializable("data", eventDetail)
-                    intent.putExtras(bundle)
-                    startActivity(intent)
+                when(eventDetail.type) {
+                    1 -> {
+                        val intent = Intent(this, MultiChoiceActivity::class.java)
+                        val bundle = Bundle()
+                        bundle.putSerializable("data", eventDetail)
+                        intent.putExtras(bundle)
+                        startActivity(intent)
+                    }
+                    2 -> {
+                        DialogDownloadApp.newInstance("",eventDetail.id ?: 0,eventDetail.receiveFunCoin?:0)
+                        SharePref.setEventCached(eventDetail.id!!, true)
+                        checkStateJoin(eventDetail)
+                    }
                 }
-                SharePref.setEventCached(eventDetail.id!!, true)
-                checkStateJoin(eventDetail)
             }
 
         }
