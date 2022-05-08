@@ -20,16 +20,19 @@ class LoginController(private val loginView: LoginView) : BaseController() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     {
-                        it.data?.let { model ->
-                            loginView.registerSuccess(model)
-                            LoginUtil.setLogin(model)
+                        if (it.success) {
+                            it.data?.let { model ->
+                                loginView.registerSuccess(model)
+                                LoginUtil.setLogin(model)
 
-                        }
-                        if (it.isFail()){
+                            }
+                        }else{
                             loginView.registerFail(it.message.toString())
                         }
+
                     }, {
                         it.printStackTrace()
+                        loginView.registerFail(it.message.toString())
                         LoginUtil.setLogout()
                     }
                 ))
@@ -43,11 +46,12 @@ class LoginController(private val loginView: LoginView) : BaseController() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     {
-                        it.data?.let { model ->
-                            LoginUtil.setLogin(model)
-                            loginView.loginSuccess(model)
-                        }
-                        if (it.isFail() ){
+                        if (it.success){
+                            it.data?.let { model ->
+                                LoginUtil.setLogin(model)
+                                loginView.loginSuccess(model)
+                            }
+                        }else{
                             loginView.loginFail("")
                         }
                     }, {

@@ -16,9 +16,12 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.ui.multi_choice.MultichoiceController
+import techlab.ai.hackathon.ui.multi_choice.MultichoiceView
+import techlab.ai.hackathon.ui.multi_choice.ResultQuestionDialog
+import techlab.ai.hackathon.ui.multi_choice.ResultQuestionDialogSuccess
 
 
-class DialogDownloadApp : DialogFragment() {
+class DialogDownloadApp : DialogFragment(), MultichoiceView {
     private lateinit var btn_download : TextView
     private var packageNme : String = ""
     private var isDownload : Boolean = false
@@ -61,6 +64,7 @@ class DialogDownloadApp : DialogFragment() {
     }
 
     private fun initView(view: View) {
+        multichoiceController = MultichoiceController(this)
         btn_download = view.findViewById(R.id.btn_download_app)
         btn_download.setOnClickListener {
             openStore(packageNme)
@@ -70,9 +74,16 @@ class DialogDownloadApp : DialogFragment() {
     fun openStore(packageName : String) {
         try {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
-            dismiss()
         } catch (e: ActivityNotFoundException) {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName")))
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (checkIsDownload(packageNme)) {
+            dismiss()
+            multichoiceController?.joinEvent(eventId.toLong())
         }
     }
 
@@ -85,5 +96,13 @@ class DialogDownloadApp : DialogFragment() {
         } catch (e: PackageManager.NameNotFoundException) {
         }
         return false
+    }
+
+    override fun joinEventSuccess(message: String) {
+        ResultQuestionDialogSuccess().newInstance(score.toDouble())?.show(parentFragmentManager,"ResultQuestionDialogSuccess")
+    }
+
+    override fun joinEventFail(message: String) {
+
     }
 }

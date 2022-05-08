@@ -71,15 +71,10 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
         multichoiceController = MultichoiceController(this)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures())
-            // Apply the insets as padding to the view. Here we're setting all of the
-            // dimensions, but apply as appropriate to your layout. You could also
-            // update the views margin if more appropriate.
             Log.d("insets.top=", insets.top.toString())
             val params = binding.toolbar.layoutParams as FrameLayout.LayoutParams
             params.setMargins(0, insets.top, 0, 0)
             binding.toolbar.layoutParams = params
-            // Return CONSUMED if we don't want the window insets to keep being passed
-            // down to descendant views.
             WindowInsetsCompat.CONSUMED
         }
         binding.toolbarLayout.title = title
@@ -128,7 +123,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
         }
     }
 
-    fun initEvent(eventDetail: EventDetail) {
+    private fun initEvent(eventDetail: EventDetail) {
         binding.btnJoin.setOnClickListener {
             if(!validateLogin()){
                 return@setOnClickListener
@@ -147,7 +142,11 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
                         startActivity(intent)
                     }
                     2 -> {
-                        DialogDownloadApp.newInstance(packageApp,eventDetail.id ?: 0,eventDetail.receiveFunCoin?:0)?.show(supportFragmentManager,"DialogDownloadApp")
+                        if (checkIsDownload(packageApp)) {
+                            multichoiceController.joinEvent(eventDetail.id!!.toLong())
+                        } else {
+                            DialogDownloadApp.newInstance(packageApp,eventDetail.id ?: 0,eventDetail.receiveFunCoin?:0)?.show(supportFragmentManager,"DialogDownloadApp")
+                        }
                         SharePref.setEventCached(eventDetail.id!!, true)
                         checkStateJoin(eventDetail)
                         isDownloadApp = true
@@ -160,12 +159,14 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
 
     override fun onResume() {
         super.onResume()
-        if (isDownloadApp) {
-            if (checkIsDownload(packageApp)) {
-                eventDetail?.id?.let { it.toLong()
-                    .let { it1 -> multichoiceController.joinEvent(it1) } }
-            }
-        }
+//        if (isDownloadApp) {
+//            if (checkIsDownload(packageApp)) {
+//                eventDetail?.id?.let { it.toLong()
+//                    .let { it1 -> multichoiceController.joinEvent(it1) } }
+//            }
+//        }
+
+        eventDetail?.let { checkStateJoin(it) }
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
@@ -182,8 +183,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
     fun checkEndtime(time: String) : Boolean{
         val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val date = dateFormat.parse(time)
-        val dateN = Date()
-        return date.before(dateN)
+        return date.before(Date())
     }
 
     override fun onEventDetailResult(eventDetail: EventDetail) {
@@ -196,8 +196,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
                     }
                 }
             }
-            binding.btnJoin.isEnabled =
-                !(eventDetail.isUserJoined == true || eventDetail.endDate?.let { checkEndtime(it) } == true)
+            checkStateJoin(eventDetail)
             initEvent(eventDetail)
             binding.ivEventCover.load(url = eventDetail.thumbnailUrl)
             binding.tvTitleToolbar.text = eventDetail.title
@@ -348,19 +347,35 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
     }
 
     private fun checkStateJoin(eventDetail: EventDetail) {
-        if (SharePref.getEventCached(eventDetail.id!!)) {
-            binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_enable)
-            binding.btnJoin.text = "Xác nhận đã tham gia"
-        } else {
-            if (eventDetail.isUserJoined!!) {
+        if (eventDetail.endDate?.let { checkEndtime(it) } == true ){
+            // Het han
+            if (eventDetail.isUserJoined == true){
+                binding.btnJoin.isEnabled = false
                 binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_disable)
                 binding.btnJoin.text = "Đã tham gia"
-            } else {
-                binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_join_enable)
-                binding.btnJoin.text = "Tham gia ngay"
+            }else{
+                binding.btnJoin.isEnabled = false
+                binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_disable)
+                binding.btnJoin.text = "Hết hạn"
+            }
+        }else{
+            // chua het han
+            if (eventDetail.isUserJoined == true){
+                binding.btnJoin.isEnabled = false
+                binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_disable)
+                binding.btnJoin.text = "Đã tham gia"
+            }else{
+                if (eventDetail.remainingFunCoin == 0) {
+                    binding.btnJoin.isEnabled = false
+                    binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_disable)
+                    binding.btnJoin.text = "Số lượng coin đã hết"
+                } else {
+                    binding.btnJoin.isEnabled = true
+                    binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_enable)
+                    binding.btnJoin.text = "Tham gia ngay"
+                }
             }
         }
-
 
     }
 
