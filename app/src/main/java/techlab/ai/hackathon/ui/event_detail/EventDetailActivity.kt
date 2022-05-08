@@ -199,7 +199,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
             if (totalFunCoin <= 0) {
                 binding.contentBody.progressCoin.setProgress(0)
             } else {
-                val percentRemain = (receiveFunCoin / totalFunCoin) * 100
+//                val percentRemain = (receiveFunCoin / totalFunCoin) * 100
                 binding.contentBody.progressCoin.setMaxProgress(totalFunCoin)
                 binding.contentBody.progressCoin.setProgress(receiveFunCoin)
             }

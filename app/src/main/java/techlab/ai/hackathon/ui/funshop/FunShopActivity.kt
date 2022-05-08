@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import techlab.ai.hackathon.R
+import techlab.ai.hackathon.common.coinFormat
 import techlab.ai.hackathon.common.toast.AppToast
 import techlab.ai.hackathon.common.toast.ToastStyle
 import techlab.ai.hackathon.data.model.DonateModel
@@ -61,7 +62,7 @@ class FunShopActivity : BaseActivity(), FunShopView {
             layoutManager = LinearLayoutManager(this@FunShopActivity)
             adapter = funShopAdapter
         }
-        binding.tvTotalCoin.text = CoinUtil.getCurrentCoin().toString()
+        binding.tvTotalCoin.text = CoinUtil.getCurrentCoin().coinFormat()
         binding.btnBack.setOnClickListener {
             finish()
         }
@@ -92,6 +93,7 @@ class FunShopActivity : BaseActivity(), FunShopView {
     }
 
     override fun onResultPackage(packages: List<ShopPackage>) {
+        hideDialog()
         funShopAdapter.listData = packages
         hideDialog()
     }
@@ -109,6 +111,7 @@ class FunShopActivity : BaseActivity(), FunShopView {
     }
 
     override fun onResultDonatePackage(packages: List<DonateModel>) {
+        hideDialog()
         funDonateAdapter.listData = packages
     }
 }

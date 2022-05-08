@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import techlab.ai.hackathon.R
+import techlab.ai.hackathon.common.coinFormat
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.loadCorner
 import techlab.ai.hackathon.common.pushdown.PushDownAnim
@@ -50,7 +51,7 @@ class FunShopViewHolder(private val binding: ItemFunShopBinding) :
             )
         )
         binding.tvTitle.text = item.title?:""
-        binding.tvCoin.text = item.funCoin.toString()
+        binding.tvCoin.text = item.funCoin.coinFormat()
         PushDownAnim.setPushDownAnimTo(binding.btnJoinNow).setOnClickListener {
 
         }

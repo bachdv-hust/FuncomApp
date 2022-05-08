@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import techlab.ai.hackathon.R
+import techlab.ai.hackathon.common.coinFormat
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.loadCorner
 import techlab.ai.hackathon.common.pushdown.PushDownAnim
@@ -55,7 +56,7 @@ class FunDonateViewHolder(private val binding: ItemFunDonateBinding) :
         binding.tvTitle.text = item.title?:""
         binding.progressCoin.setMaxProgress(item.total_fun_coin!!)
         binding.progressCoin.setProgress(item.supported_fun_coins!!)
-        binding.tvCoinCirculating.text = item.supported_fun_coins.toString()
-        binding.tvCoinTotal.text = item.total_fun_coin.toString()
+        binding.tvCoinCirculating.text = item.supported_fun_coins?.coinFormat()
+        binding.tvCoinTotal.text = item.total_fun_coin?.coinFormat()
     }
 }

@@ -14,31 +14,49 @@ import techlab.ai.hackathon.R;
  */
 public class FloatTextProgressBar extends ProgressBar {
 
-    /**进度条高度*/
+    /**
+     * 进度条高度
+     */
     private float progressHeight;
 
-    /**浮动框宽度*/
+    /**
+     * 浮动框宽度
+     */
     private float floatRectWidth;
 
-    /**浮动框高度*/
+    /**
+     * 浮动框高度
+     */
     private float floatRectHeight;
 
-    /**三角形宽度*/
+    /**
+     * 三角形宽度
+     */
     private float triangleWidth;
 
-    /**浮动框左右边距*/
+    /**
+     * 浮动框左右边距
+     */
     private float margin;
 
-    /**文字大小*/
+    /**
+     * 文字大小
+     */
     private float textSize;
 
-    /**三角形颜色*/
+    /**
+     * 三角形颜色
+     */
     private int triangleColor;
 
-    /**浮动框颜色*/
+    /**
+     * 浮动框颜色
+     */
     private int rectColor;
 
-    /**进度条填充颜色*/
+    /**
+     * 进度条填充颜色
+     */
     protected int fillColor;
 
     public FloatTextProgressBar(Context context) {
@@ -59,14 +77,14 @@ public class FloatTextProgressBar extends ProgressBar {
     protected void getDimension() {
         super.getDimension();
         progressHeight = height / 5;
-        floatRectWidth = height /  5 * 4;
+        floatRectWidth = height / 5 * 4;
         floatRectHeight = height / 9 * 4;
         triangleWidth = height / 7 * 2;
         margin = dip2px(3);
         textSize = height / 4;
     }
 
-    private void init(AttributeSet attrs){
+    private void init(AttributeSet attrs) {
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.floatTextProgressBar);
         fillColor = a.getColor(R.styleable.floatTextProgressBar_fillColor, 0xffff0000);
         triangleColor = a.getColor(R.styleable.floatTextProgressBar_triangleColor, 0xffff0000);
@@ -90,13 +108,13 @@ public class FloatTextProgressBar extends ProgressBar {
     }
 
 
-
     /**
      * 绘制浮动框
+     *
      * @param canvas
      */
-    private void drawFloatRect(Canvas canvas){
-        if (progressWidth < floatRectWidth + margin){
+    private void drawFloatRect(Canvas canvas) {
+        if (progressWidth < floatRectWidth + margin) {
             //绘制浮动框
             paint.setColor(rectColor);
             RectF floatRectF = new RectF(margin, 0, margin + floatRectWidth, floatRectHeight);
@@ -110,10 +128,10 @@ public class FloatTextProgressBar extends ProgressBar {
             path.lineTo(margin + floatRectWidth / 2, floatRectWidth / 4 + height / 7 * 3);
             path.close();
             canvas.drawPath(path, paint);
-        } else if (width - progressWidth < floatRectWidth + margin){
+        } else if (width - progressWidth < floatRectWidth + margin) {
             //绘制浮动框
             paint.setColor(rectColor);
-            RectF floatRectF = new RectF(width - floatRectWidth - margin ,0, width - margin, floatRectHeight);
+            RectF floatRectF = new RectF(width - floatRectWidth - margin, 0, width - margin, floatRectHeight);
             canvas.drawRoundRect(floatRectF, dip2px(2), dip2px(2), paint);
 
             //绘制三角形
@@ -127,7 +145,7 @@ public class FloatTextProgressBar extends ProgressBar {
         } else {
             //绘制浮动框
             paint.setColor(rectColor);
-            RectF floatRectF = new RectF(progressWidth - floatRectWidth / 2 ,0, progressWidth + floatRectWidth / 2, floatRectHeight);
+            RectF floatRectF = new RectF(progressWidth - floatRectWidth / 2, 0, progressWidth + floatRectWidth / 2, floatRectHeight);
             canvas.drawRoundRect(floatRectF, dip2px(2), dip2px(2), paint);
 
             //绘制三角形
@@ -145,11 +163,11 @@ public class FloatTextProgressBar extends ProgressBar {
     public void drawText(Canvas canvas) {
         paint.setColor(textColor);
         paint.setTextSize(textSize);
-        String progressText = (progress * 100f / this.maxProgress) + "%";
+        String progressText = String.format("%.1f", (progress * 100f / this.maxProgress)) + "%";
         float textWidth = paint.measureText(progressText);
         if (progressWidth < floatRectWidth + margin) {
             canvas.drawText(progressText, margin + floatRectWidth / 2 - textWidth / 2, floatRectHeight / 2 + textSize / 4, paint);
-        } else if (width - progressWidth < floatRectWidth + margin){
+        } else if (width - progressWidth < floatRectWidth + margin) {
             canvas.drawText(progressText, width - margin - floatRectWidth / 2 - textWidth / 2, floatRectHeight / 2 + textSize / 4, paint);
         } else {
             canvas.drawText(progressText, progressWidth - textWidth / 2, floatRectHeight / 2 + textSize / 4, paint);
@@ -158,6 +176,7 @@ public class FloatTextProgressBar extends ProgressBar {
 
     /**
      * 设置填充色
+     *
      * @param fillColor
      */
     public void setFillColor(int fillColor) {
@@ -166,6 +185,7 @@ public class FloatTextProgressBar extends ProgressBar {
 
     /**
      * 设置浮动框颜色
+     *
      * @param rectColor
      */
     public void setRectColor(int rectColor) {
@@ -174,6 +194,7 @@ public class FloatTextProgressBar extends ProgressBar {
 
     /**
      * 设置三角形颜色
+     *
      * @param triangleColor
      */
     public void setTriangleColor(int triangleColor) {
