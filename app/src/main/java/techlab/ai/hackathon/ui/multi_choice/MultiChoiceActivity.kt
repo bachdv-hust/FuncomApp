@@ -142,6 +142,11 @@ class MultiChoiceActivity : BaseActivity(), MultichoiceView {
             ?.let { ResultQuestionDialogSuccess().newInstance(it)?.show(supportFragmentManager,"ResultQuestionDialogSuccess") }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        setResult(1000)
+    }
+
     override fun joinEventFail(message: String) {
         Toast.makeText(this,message,Toast.LENGTH_LONG).show()
         multiChoiceBinding.btnConfirmMultiChoice.isEnabled = false
