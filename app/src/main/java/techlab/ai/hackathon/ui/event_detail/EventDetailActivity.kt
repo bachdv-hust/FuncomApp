@@ -71,15 +71,10 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
         multichoiceController = MultichoiceController(this)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures())
-            // Apply the insets as padding to the view. Here we're setting all of the
-            // dimensions, but apply as appropriate to your layout. You could also
-            // update the views margin if more appropriate.
             Log.d("insets.top=", insets.top.toString())
             val params = binding.toolbar.layoutParams as FrameLayout.LayoutParams
             params.setMargins(0, insets.top, 0, 0)
             binding.toolbar.layoutParams = params
-            // Return CONSUMED if we don't want the window insets to keep being passed
-            // down to descendant views.
             WindowInsetsCompat.CONSUMED
         }
         binding.toolbarLayout.title = title
@@ -128,7 +123,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
         }
     }
 
-    fun initEvent(eventDetail: EventDetail) {
+    private fun initEvent(eventDetail: EventDetail) {
         binding.btnJoin.setOnClickListener {
             if(!validateLogin()){
                 return@setOnClickListener
@@ -182,8 +177,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
     fun checkEndtime(time: String) : Boolean{
         val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val date = dateFormat.parse(time)
-        val dateN = Date()
-        return date.before(dateN)
+        return date.before(Date())
     }
 
     override fun onEventDetailResult(eventDetail: EventDetail) {
@@ -196,8 +190,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
                     }
                 }
             }
-            binding.btnJoin.isEnabled =
-                !(eventDetail.isUserJoined == true || eventDetail.endDate?.let { checkEndtime(it) } == true)
+            checkStateJoin(eventDetail)
             initEvent(eventDetail)
             binding.ivEventCover.load(url = eventDetail.thumbnailUrl)
             binding.tvTitleToolbar.text = eventDetail.title
@@ -349,14 +342,15 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
             binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_enable)
             binding.btnJoin.text = "Xác nhận đã tham gia"
         } else {
-            if (eventDetail.isUserJoined!!) {
-                binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_disable)
+            if (eventDetail.isUserJoined ==true|| eventDetail.endDate?.let { checkEndtime(it) } == true) {
+                binding.btnJoin.isEnabled = false
                 binding.btnJoin.text = "Đã tham gia"
             } else {
-                binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_join_enable)
+                binding.btnJoin.isEnabled = true
                 binding.btnJoin.text = "Tham gia ngay"
             }
         }
+
 
 
     }
