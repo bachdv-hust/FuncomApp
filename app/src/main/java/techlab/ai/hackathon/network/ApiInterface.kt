@@ -48,8 +48,10 @@ interface ApiInterface {
         @Field("event_id") eventId: Long,
         @Field("content") content: String
     ): Observable<BaseResponse<Any>>
+
+    @FormUrlEncoded
     @POST("/events/user-joined")
-    fun event(eventId : Int) : Observable<BaseResponse<DemoModel>>
+    fun joinEvent(@Field("event_id") eventId: Long) : Observable<BaseResponse<Any>>
 
 
     @GET("shops")

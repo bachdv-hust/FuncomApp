@@ -17,7 +17,7 @@ import techlab.ai.hackathon.ui.base.BaseActivity
 import kotlin.coroutines.CoroutineContext
 
 
-class MultiChoiceActivity : BaseActivity() {
+class MultiChoiceActivity : BaseActivity(), MultichoiceView {
     private lateinit var multiChoiceBinding: ActivityMultiChoiceBinding
     private lateinit var adapter : MultichoiceAdapter
     private var rcv : RecyclerView? = null
@@ -29,12 +29,14 @@ class MultiChoiceActivity : BaseActivity() {
     private var setAnswerCorrect : MutableSet<Int>? = null
     private var setAnswerFalse : MutableSet<Int>? = null
     private var listQuestionData : MutableList<QuestionData>? = mutableListOf()
+    private var multichoiceController : MultichoiceController? = null
     override fun initBindingView(): View {
         multiChoiceBinding = ActivityMultiChoiceBinding.inflate(layoutInflater)
         return multiChoiceBinding.root
     }
 
     override fun afterCreatedView() {
+        multichoiceController = MultichoiceController(this)
         intent?.let {
             eventDetail = it.getSerializableExtra("data") as EventDetail
         }
@@ -74,7 +76,7 @@ class MultiChoiceActivity : BaseActivity() {
         rcv?.adapter = adapter
         multiChoiceBinding.btnConfirmMultiChoice.setOnClickListener {
             if (setAnswerCorrect!!.size == numQuestion) {
-                ResultQuestionDialogSuccess().newInstance(resultQuestionModle)?.show(supportFragmentManager,"ResultQuestionDialogSuccess")
+                eventDetail?.id?.let { it1 -> multichoiceController?.joinEvent(it1.toLong()) }
             } else {
                 resultQuestionModle.total_question = numQuestion
                 resultQuestionModle.total_question_correct = setAnswerCorrect?.size ?: 0
@@ -132,5 +134,14 @@ class MultiChoiceActivity : BaseActivity() {
         }
         listQuestionData?.addAll(listQuestion)
         return listQuestion
+    }
+
+    override fun joinEventSuccess(message: String) {
+        eventDetail?.receiveFunCoin?.toDouble()
+            ?.let { ResultQuestionDialogSuccess().newInstance(it)?.show(supportFragmentManager,"ResultQuestionDialogSuccess") }
+    }
+
+    override fun joinEventFail(message: String) {
+
     }
 }

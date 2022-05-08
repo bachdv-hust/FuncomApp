@@ -23,19 +23,20 @@
         android:text="+500 FunCoin"
         android:textColor="@color/color_F0B20B"
         android:textSize="@dimen/sp_16" />
+
     <TextView
         android:id="@+id/tv_congratulation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_coin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_12"
+        android:fontFamily="@font/inter_semi_bold"
         android:gravity="center"
         android:text="Chúc mừng \n
 Bạn đã xuất sắc hoàn thành bộ câu hỏi"
         android:textColor="@color/Base_B500"
-        android:textSize="@dimen/sp_14"
-        android:layout_marginTop="@dimen/dp_12"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/inter_semi_bold"/>
+        android:textSize="@dimen/sp_14" />
 
     <TextView
         android:id="@+id/btn_give_coin"

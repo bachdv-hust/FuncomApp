@@ -13,11 +13,12 @@ import techlab.ai.hackathon.data.model.ResultQuestionModle
 class ResultQuestionDialogSuccess() : DialogFragment() {
     var tv_coin : TextView? = null
     var btn_give : TextView? = null
+    private var score : Double = 0.0
 
-    fun newInstance(resultQuestionModle: ResultQuestionModle): ResultQuestionDialogSuccess? {
+    fun newInstance(score: Double): ResultQuestionDialogSuccess? {
         val frag = ResultQuestionDialogSuccess()
         val args = Bundle()
-        args.putSerializable("data", resultQuestionModle)
+        args.putDouble("data", score)
         frag.setArguments(args)
         return frag
     }
@@ -25,6 +26,9 @@ class ResultQuestionDialogSuccess() : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.apply {
+            score = getDouble("data")
+        }
     }
 
     override fun onCreateView(
@@ -40,6 +44,7 @@ class ResultQuestionDialogSuccess() : DialogFragment() {
     fun initView(view: View) {
         tv_coin = view.findViewById(R.id.tv_coin)
         btn_give = view.findViewById(R.id.btn_give_coin)
+        tv_coin?.text = score.toString() + "Funcoin"
         btn_give?.setOnClickListener {
 
         }
