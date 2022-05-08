@@ -18,7 +18,6 @@ import techlab.ai.hackathon.cached.SharePref
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.loadHtml
 import techlab.ai.hackathon.common.openWebUrl
-import techlab.ai.hackathon.common.pushdown.PushDownAnim
 import techlab.ai.hackathon.common.toast.AppToast
 import techlab.ai.hackathon.common.toast.ToastStyle
 import techlab.ai.hackathon.data.model.EventDetail
@@ -171,13 +170,19 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
 
     @SuppressLint("UseRequireInsteadOfGet")
     fun checkIsDownload(uri : String) : Boolean {
-        val pm: PackageManager? = getPackageManager()
-        try {
-            pm?.getPackageInfo(uri, PackageManager.GET_ACTIVITIES)
-            return true
+//        val pm: PackageManager? = getPackageManager()
+//        try {
+//            pm?.getPackageInfo(uri, PackageManager.GET_ACTIVITIES)
+//            return true
+//        } catch (e: PackageManager.NameNotFoundException) {
+//        }
+//        return false
+        return try {
+            packageManager.getPackageInfo(packageName, 0)
+            true
         } catch (e: PackageManager.NameNotFoundException) {
+            false
         }
-        return false
     }
 
     fun checkEndtime(time: String) : Boolean{
