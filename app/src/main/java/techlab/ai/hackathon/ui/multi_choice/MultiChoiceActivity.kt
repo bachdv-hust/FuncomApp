@@ -56,8 +56,8 @@ class MultiChoiceActivity : BaseActivity() {
                         }
 
                     } else {
-                        if (!setAnswerFalse!!.contains(questionData.idAnswer)){
-                            questionData.idAnswer?.let { setAnswerFalse?.add(it) }
+                        if (setAnswerCorrect!!.contains(questionData.idAnswer)){
+                            questionData.idAnswer?.let { setAnswerCorrect?.remove(it) }
                         }
 
                     }
@@ -78,7 +78,7 @@ class MultiChoiceActivity : BaseActivity() {
             } else {
                 resultQuestionModle.total_question = numQuestion
                 resultQuestionModle.total_question_correct = setAnswerCorrect?.size ?: 0
-                resultQuestionModle.total_question_false = setAnswerFalse?.size!!
+                resultQuestionModle.total_question_false = numQuestion - setAnswerCorrect?.size!!
                 ResultQuestionDialog().newInstance(resultQuestionModle)?.show(supportFragmentManager,"")
                 adapter.checkResult()
             }
