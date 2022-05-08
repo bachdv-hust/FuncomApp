@@ -34,10 +34,10 @@ class DownLoadAppDialog : BaseDialogFragment() {
     }
 
     override fun afterCreatedView(view: View) {
-        PushDownAnim.setPushDownAnimTo(binding.btnDownload).setOnClickListener {
-            dismiss()
-            callBack?.oncClickDownLoadBtn()
-        }
+//        PushDownAnim.setPushDownAnimTo(binding.btnDownload).setOnClickListener {
+//            dismiss()
+//            callBack?.oncClickDownLoadBtn()
+//        }
     }
 
 
