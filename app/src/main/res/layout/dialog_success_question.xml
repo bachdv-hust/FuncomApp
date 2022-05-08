@@ -34,8 +34,7 @@
         android:layout_marginTop="@dimen/dp_12"
         android:fontFamily="@font/inter_semi_bold"
         android:gravity="center"
-        android:text="Chúc mừng \n
-Bạn đã xuất sắc hoàn thành bộ câu hỏi"
+        android:text="Chúc mừng\nbạn đã hoàn thành nhiệm vụ"
         android:textColor="@color/Base_B500"
         android:textSize="@dimen/sp_14" />
 
