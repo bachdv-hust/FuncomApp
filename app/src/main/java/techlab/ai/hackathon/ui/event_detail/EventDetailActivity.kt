@@ -142,7 +142,11 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
                         startActivity(intent)
                     }
                     2 -> {
-                        DialogDownloadApp.newInstance(packageApp,eventDetail.id ?: 0,eventDetail.receiveFunCoin?:0)?.show(supportFragmentManager,"DialogDownloadApp")
+                        if (checkIsDownload(packageApp)) {
+                            multichoiceController.joinEvent(eventDetail.id!!.toLong())
+                        } else {
+                            DialogDownloadApp.newInstance(packageApp,eventDetail.id ?: 0,eventDetail.receiveFunCoin?:0)?.show(supportFragmentManager,"DialogDownloadApp")
+                        }
                         SharePref.setEventCached(eventDetail.id!!, true)
                         checkStateJoin(eventDetail)
                         isDownloadApp = true
@@ -155,12 +159,14 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
 
     override fun onResume() {
         super.onResume()
-        if (isDownloadApp) {
-            if (checkIsDownload(packageApp)) {
-                eventDetail?.id?.let { it.toLong()
-                    .let { it1 -> multichoiceController.joinEvent(it1) } }
-            }
-        }
+//        if (isDownloadApp) {
+//            if (checkIsDownload(packageApp)) {
+//                eventDetail?.id?.let { it.toLong()
+//                    .let { it1 -> multichoiceController.joinEvent(it1) } }
+//            }
+//        }
+
+        eventDetail?.let { checkStateJoin(it) }
     }
 
     @SuppressLint("UseRequireInsteadOfGet")
@@ -338,20 +344,35 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
     }
 
     private fun checkStateJoin(eventDetail: EventDetail) {
-        if (SharePref.getEventCached(eventDetail.id!!)) {
-            binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_enable)
-            binding.btnJoin.text = "Xác nhận đã tham gia"
-        } else {
-            if (eventDetail.isUserJoined ==true|| eventDetail.endDate?.let { checkEndtime(it) } == true) {
+        if (eventDetail.endDate?.let { checkEndtime(it) } == true ){
+            // Het han
+            if (eventDetail.isUserJoined == true){
                 binding.btnJoin.isEnabled = false
+                binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_disable)
                 binding.btnJoin.text = "Đã tham gia"
-            } else {
-                binding.btnJoin.isEnabled = true
-                binding.btnJoin.text = "Tham gia ngay"
+            }else{
+                binding.btnJoin.isEnabled = false
+                binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_disable)
+                binding.btnJoin.text = "Hết hạn"
+            }
+        }else{
+            // chua het han
+            if (eventDetail.isUserJoined == true){
+                binding.btnJoin.isEnabled = false
+                binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_disable)
+                binding.btnJoin.text = "Đã tham gia"
+            }else{
+                if (eventDetail.remainingFunCoin == 0) {
+                    binding.btnJoin.isEnabled = false
+                    binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_disable)
+                    binding.btnJoin.text = "Số lượng coin đã hết"
+                } else {
+                    binding.btnJoin.isEnabled = true
+                    binding.btnJoin.setBackgroundResource(R.drawable.bg_btn_register_enable)
+                    binding.btnJoin.text = "Tham gia ngay"
+                }
             }
         }
-
-
 
     }
 
