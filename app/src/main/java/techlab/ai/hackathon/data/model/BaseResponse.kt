@@ -8,6 +8,10 @@ import com.google.gson.annotations.SerializedName
 class BaseResponse<T>(
     @SerializedName("code")
     val code: Int =0 ,
+    @SerializedName("error")
+    val error: Error,
+    @SerializedName("success")
+    val success: Boolean = false ,
     @SerializedName("status")
     val status: Int,
     @SerializedName("message")

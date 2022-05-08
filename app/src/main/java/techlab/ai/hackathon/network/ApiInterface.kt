@@ -16,10 +16,10 @@ interface ApiInterface {
     @GET("events")
     fun getDataNewFeed(): Observable<BaseListResponse<NewFeed>>
 
-    @GET("events/{eventId}")
+    @GET("events/{event_id}")
     fun getEventDetail(
-        @Path("eventId") eventId: String,
-        @Query("userId") userId: String
+        @Path("event_id") event_id: String,
+        @Query("user_id") user_id: String
     ): Observable<BaseResponse<EventDetail>>
 
     @FormUrlEncoded

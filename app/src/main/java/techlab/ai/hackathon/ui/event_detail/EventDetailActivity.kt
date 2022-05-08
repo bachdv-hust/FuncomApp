@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.appbar.AppBarLayout
@@ -33,6 +34,9 @@ import techlab.ai.hackathon.ui.multi_choice.MultichoiceView
 import techlab.ai.hackathon.ui.multi_choice.ResultQuestionDialogSuccess
 import techlab.ai.hackathon.ui.persionjoined.PersonJoinedActivity
 import techlab.ai.hackathon.ui.view_descript.ViewDescriptionActivity
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.abs
 
 class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
@@ -47,6 +51,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
     }
 
     private var isDownloadApp : Boolean = false
+    private var packageApp : String = ""
 
     private lateinit var binding: ActivityEventDetailBinding
     private var eventDetail : EventDetail? = null
@@ -108,14 +113,9 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
                 CommentActivity.startSelf(this, eventId?.toLong() ?: -1)
             }
         }
-        PushDownAnim.setPushDownAnimTo(binding.contentBody.ctnDownload).setOnClickListener {
-            val dialog = DownLoadAppDialog.show(supportFragmentManager)
-            dialog.callBack = object : DownloadDialogCallBack {
-                override fun oncClickDownLoadBtn() {
-                    // TODO
-                }
-            }
-        }
+//        PushDownAnim.setPushDownAnimTo(binding.contentBody.ctnDownload).setOnClickListener {
+//            DialogDownloadApp.newInstance()
+//        }
         eventId?.let { userId?.let { it1 -> eventController.getEventDetail(it, it1) } }
     }
 
@@ -147,7 +147,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
                         startActivity(intent)
                     }
                     2 -> {
-                        DialogDownloadApp.newInstance("com.ffff.docbao24h",eventDetail.id ?: 0,eventDetail.receiveFunCoin?:0)?.show(supportFragmentManager,"DialogDownloadApp")
+                        DialogDownloadApp.newInstance(packageApp,eventDetail.id ?: 0,eventDetail.receiveFunCoin?:0)?.show(supportFragmentManager,"DialogDownloadApp")
                         SharePref.setEventCached(eventDetail.id!!, true)
                         checkStateJoin(eventDetail)
                         isDownloadApp = true
@@ -161,7 +161,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
     override fun onResume() {
         super.onResume()
         if (isDownloadApp) {
-            if (checkIsDownload("com.ffff.docbao24h")) {
+            if (checkIsDownload(packageApp)) {
                 eventDetail?.id?.let { it.toLong()
                     .let { it1 -> multichoiceController.joinEvent(it1) } }
             }
@@ -179,9 +179,25 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
         return false
     }
 
+    fun checkEndtime(time: String) : Boolean{
+        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val date = dateFormat.parse(time)
+        val dateN = Date()
+        return date.before(dateN)
+    }
+
     override fun onEventDetailResult(eventDetail: EventDetail) {
         try {
             this.eventDetail = eventDetail
+            eventDetail?.link_app?.let {
+                it.forEachIndexed { index, links ->
+                    if (links.platform.equals("Android")) {
+                        packageApp = links.packageApp.toString()
+                    }
+                }
+            }
+            binding.btnJoin.isEnabled =
+                !(eventDetail.isUserJoined == true || eventDetail.endDate?.let { checkEndtime(it) } == true)
             initEvent(eventDetail)
             binding.ivEventCover.load(url = eventDetail.thumbnailUrl)
             binding.tvTitleToolbar.text = eventDetail.title
@@ -344,6 +360,6 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
     }
 
     override fun joinEventFail(message: String) {
-
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
     }
 }
