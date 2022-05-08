@@ -88,7 +88,8 @@
                         android:layout_marginEnd="@dimen/dp_10"
                         android:text="0"
                         android:textColor="#F2783D"
-                        android:textSize="@dimen/sp_18" />
+                        android:fontFamily="@font/inter_semi_bold"
+                        android:textSize="@dimen/sp_16" />
                 </LinearLayout>
 
                 <ImageView
