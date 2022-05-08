@@ -11,6 +11,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import techlab.ai.hackathon.R
+import techlab.ai.hackathon.common.toast.AppToast
+import techlab.ai.hackathon.common.toast.ToastStyle
 import techlab.ai.hackathon.data.model.DonateModel
 import techlab.ai.hackathon.data.model.ShopPackage
 import techlab.ai.hackathon.databinding.ActivityFunShopBinding
@@ -94,7 +96,19 @@ class FunShopActivity : BaseActivity(), FunShopView {
         hideDialog()
     }
 
+    override fun getPackageFail() {
+        hideDialog()
+        AppToast.createToast(ToastStyle.ERROR).setText("Có lỗi xảy ra!").show(this)
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        hideDialog()
+        funShopController.clear()
+    }
+
     override fun onResultDonatePackage(packages: List<DonateModel>) {
-        funDonateAdapter.listData =packages
+        funDonateAdapter.listData = packages
     }
 }

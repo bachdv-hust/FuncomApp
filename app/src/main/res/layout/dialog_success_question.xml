@@ -51,7 +51,7 @@ Bạn đã xuất sắc hoàn thành bộ câu hỏi"
         android:gravity="center"
         android:paddingTop="@dimen/dp_12"
         android:paddingBottom="@dimen/dp_12"
-        android:text="Nhận"
+        android:text="Đóng"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_18" />
 </RelativeLayout>

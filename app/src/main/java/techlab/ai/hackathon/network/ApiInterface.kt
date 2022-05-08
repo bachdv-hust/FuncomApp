@@ -53,10 +53,13 @@ interface ApiInterface {
     ): Observable<BaseResponse<Any>>
 
     @FormUrlEncoded
-    @POST("/events/user-joined")
+    @POST("events/user-joined")
     fun joinEvent(@Field("event_id") eventId: Long) : Observable<BaseResponse<Any>>
 
 
     @GET("shops")
     fun getShopPackage(): Observable<BaseListResponse<ShopPackage>>
+
+    @GET("users/info")
+    fun getInfo(): Observable<BaseResponse<UserModel>>
 }

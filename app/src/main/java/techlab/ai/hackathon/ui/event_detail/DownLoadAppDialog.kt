@@ -8,7 +8,6 @@ import techlab.ai.hackathon.common.pushdown.PushDownAnim
 import techlab.ai.hackathon.databinding.DialogDownLoadAppBinding
 import techlab.ai.hackathon.ui.base.BaseDialogFragment
 
-
 class DownLoadAppDialog : BaseDialogFragment() {
 
     companion object {
@@ -35,10 +34,10 @@ class DownLoadAppDialog : BaseDialogFragment() {
     }
 
     override fun afterCreatedView(view: View) {
-        PushDownAnim.setPushDownAnimTo(binding.btnDownload).setOnClickListener {
-            dismiss()
-            callBack?.oncClickDownLoadBtn()
-        }
+//        PushDownAnim.setPushDownAnimTo(binding.btnDownload).setOnClickListener {
+//            dismiss()
+//            callBack?.oncClickDownLoadBtn()
+//        }
     }
 
 

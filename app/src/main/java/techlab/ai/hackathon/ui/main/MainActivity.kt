@@ -24,7 +24,7 @@ import techlab.ai.hackathon.ui.main.adapter.NewFeedAdapter
 import techlab.ai.hackathon.ui.manager.*
 import techlab.ai.hackathon.ui.profile.ProfileActivity
 
-class MainActivity : BaseActivity(), MainView, LoginChangedListener , CoinChangeListener {
+class MainActivity : BaseActivity(), MainView, LoginChangedListener, CoinChangeListener {
 
     companion object {
         @JvmStatic
@@ -47,6 +47,9 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener , CoinChange
     private val refreshHandler = Handler(Looper.getMainLooper())
 
     override fun afterCreatedView() {
+        binding.statusBar.layoutParams = binding.statusBar.layoutParams?.apply {
+            height = getStatusBarHeight()
+        }
         mainController = MainController(this)
         AppLoginManager.addListener(this)
         AppCoinManager.addListener(this)
@@ -57,7 +60,7 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener , CoinChange
         }
 
         binding.ivAvatar.setOnClickListener {
-            if (validateLogin()){
+            if (validateLogin()) {
                 ProfileActivity.startSelf(this)
             }
         }
@@ -69,7 +72,7 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener , CoinChange
         }
 
         PushDownAnim.setPushDownAnimTo(binding.btnFunShop).setOnClickListener {
-            if (validateLogin()){
+            if (validateLogin()) {
                 FunShopActivity.startSelf(this)
             }
         }
@@ -78,12 +81,23 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener , CoinChange
         updateUI()
         onRefresh()
     }
-    private fun validateLogin() : Boolean{
-        return if (SharePref.isLogin){
+
+    private fun validateLogin(): Boolean {
+        return if (SharePref.isLogin) {
             true
-        }else{
+        } else {
             LoginDialog.show(supportFragmentManager)
             false
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (SharePref.isLogin) {
+            try {
+                mainController.getInfo()
+            } catch (e: Exception) {
+            }
         }
     }
 
@@ -93,7 +107,7 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener , CoinChange
             val user = Gson().fromJson(userString, UserModel::class.java)
             user.avatar?.let {
                 binding.ivAvatar.load(url = it, placeholder = R.drawable.ic_logo_funtap)
-            }?: kotlin.run {
+            } ?: kotlin.run {
                 val av = AvatarGenerator.AvatarBuilder(this)
                     .setLabel(user?.lastName ?: "")
                     .setAvatarSize(120)

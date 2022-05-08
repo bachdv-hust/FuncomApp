@@ -60,8 +60,7 @@ class CommentActivity : BaseActivity(), CommentView {
     override fun afterCreatedView() {
         commentController = CommentController(this)
         commentAdapter = CommentAdapter()
-        handler = Handler(Looper.getMainLooper())
-        startRepeat()
+
         binding.rvList.apply {
             layoutManager = LinearLayoutManager(this@CommentActivity)
             adapter = commentAdapter
@@ -91,13 +90,14 @@ class CommentActivity : BaseActivity(), CommentView {
         } else {
             finish()
         }
-
+        handler = Handler(Looper.getMainLooper())
+        startRepeat()
 
     }
 
     override fun onCommentResult(comments: List<CommentModel>) {
         hideDialog()
-        commentAdapter.listData = comments
+        commentAdapter.submitList(comments)
         if (comments.isEmpty()) {
             binding.tvEmpty.visibility = View.VISIBLE
         } else {
@@ -114,11 +114,13 @@ class CommentActivity : BaseActivity(), CommentView {
     }
 
     override fun commentSuccess() {
+        hideDialog()
         binding.textBoxView.getEdtCmt().setText("")
         refresh()
     }
 
     override fun commentFail() {
+        hideDialog()
         AppToast.createToast(ToastStyle.ERROR).setText("Cõ lỗi xảy ra!").show(this)
     }
 

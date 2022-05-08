@@ -7,21 +7,79 @@
     android:orientation="vertical"
     tools:context=".ui.profile.ProfileActivity">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Thong tin ca nhan"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp_24" />
+        android:layout_height="@dimen/dp_50">
 
-    <TextView
-        android:id="@+id/btnLogout"
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/dp_18"
+            android:layout_height="@dimen/dp_18"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp_18"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back_person" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/inter_semi_bold"
+            android:text="Thông tin cá nhân"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:fontFamily="@font/inter_regular"
+            android:text="Đăng xuất"
+            android:textColor="#8F8F8F"
+            android:textSize="@dimen/sp_12" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="#EAEAEA" />
+
+
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_30" />
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sp_20"
-        android:text="Dang xuat"
-        />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_18"
+        android:background="@drawable/bg_home_coin_current"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_margin="@dimen/dp_6"
+            android:src="@drawable/ic_coin" />
+
+        <TextView
+            android:id="@+id/tvTotalCoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:text="0"
+            android:textColor="#F2783D"
+            android:textSize="@dimen/sp_18" />
+    </LinearLayout>
 
 
 </LinearLayout>
