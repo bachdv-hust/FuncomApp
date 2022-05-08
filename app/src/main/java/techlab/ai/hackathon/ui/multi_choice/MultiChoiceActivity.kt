@@ -102,6 +102,7 @@ class MultiChoiceActivity : BaseActivity() {
                 if (index != position && questionData.isCheck) {
                     qt.isCheck = false
                     adapter.notifyItemChanged(index,"reset")
+                    adapter.notifyItemChanged(position,"check")
                 }
             }
         }

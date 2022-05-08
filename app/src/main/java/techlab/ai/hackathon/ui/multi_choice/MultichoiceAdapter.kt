@@ -42,12 +42,16 @@ class MultichoiceAdapter(val listener: OnQuestionClick) :
     ) {
         if (payloads.isNotEmpty()) {
             val context = holder.itemView.context
-            if (payloads[0] == "reset") {
-                if (holder is AnwserViewHolder) {
+            if (holder is AnwserViewHolder) {
+                if (payloads[0] == "reset") {
                     holder.cbt_anwser.setImageDrawable(context.resources.getDrawable(R.drawable.questionselectionunselected))
                     holder.txt_anwser.setTextColor(context.resources.getColor(R.color.Base_B500))
+                }else{
+                    holder.txt_anwser.setTextColor(context.resources.getColor(R.color.Base_B500))
+                    holder.cbt_anwser.setImageDrawable(context.resources.getDrawable(R.drawable.questionsselectionselected))
                 }
             }
+
         } else {
             super.onBindViewHolder(holder, position, payloads)
         }
@@ -60,34 +64,22 @@ class MultichoiceAdapter(val listener: OnQuestionClick) :
             holder.txt_question.text = listQuestion[position].question
         } else if (holder is AnwserViewHolder) {
             val check = false
-            if (setResult) {
-                if (listQuestion[position].isCheck) {
-                    if (listQuestion[position].answer.equals(listQuestion[position].correct)) {
-                        holder.txt_anwser.setTextColor(context.resources.getColor(R.color.Base_B500))
-                        holder.cbt_anwser.setImageDrawable(context.resources.getDrawable(R.drawable.questionsselectionselected))
-                    } else {
-                        holder.cbt_anwser.setImageDrawable(context.resources.getDrawable(R.drawable.questionselectionunerror))
-                        holder.txt_anwser.setTextColor(context.resources.getColor(R.color.red))
-                    }
-                } else {
-                    holder.cbt_anwser.setImageDrawable(context.resources.getDrawable(R.drawable.questionselectionunselected))
-                    holder.txt_anwser.setTextColor(context.resources.getColor(R.color.Base_B500))
-                }
-            } else {
-                if (listQuestion[position].isCheck) {
+            if (listQuestion[position].isCheck) {
+                if (listQuestion[position].answer.equals(listQuestion[position].correct)) {
                     holder.txt_anwser.setTextColor(context.resources.getColor(R.color.Base_B500))
                     holder.cbt_anwser.setImageDrawable(context.resources.getDrawable(R.drawable.questionsselectionselected))
                 } else {
-                    holder.cbt_anwser.setImageDrawable(context.resources.getDrawable(R.drawable.questionselectionunselected))
-                    holder.txt_anwser.setTextColor(context.resources.getColor(R.color.Base_B500))
+                    holder.cbt_anwser.setImageDrawable(context.resources.getDrawable(R.drawable.questionselectionunerror))
+                    holder.txt_anwser.setTextColor(context.resources.getColor(R.color.red))
                 }
+            } else {
+                holder.cbt_anwser.setImageDrawable(context.resources.getDrawable(R.drawable.questionselectionunselected))
+                holder.txt_anwser.setTextColor(context.resources.getColor(R.color.Base_B500))
             }
-
 
             holder.txt_anwser.text = listQuestion[position].answer
             holder.row_answer.setOnClickListener {
                 listQuestion[position].isCheck = !check
-//                listQuestion[position].choice =  listQuestion[position].answer
                 listener.questionClick(listQuestion[position], position)
             }
         }
