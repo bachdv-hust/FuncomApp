@@ -140,7 +140,7 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
                         val bundle = Bundle()
                         bundle.putSerializable("data", eventDetail)
                         intent.putExtras(bundle)
-                        startActivity(intent)
+                        startActivityForResult(intent,1000)
                     }
                     2 -> {
                         if (checkIsDownload(packageApp)) {
@@ -384,6 +384,18 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
     override fun joinEventSuccess(message: String) {
         eventDetail?.receiveFunCoin?.let { it.toDouble()
             .let { it1 -> ResultQuestionDialogSuccess().newInstance(it1)?.show(supportFragmentManager,"ResultQuestionDialogSuccess") } }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1000) {
+            val coin = (eventDetail?.totalFunCoin?.minus(eventDetail?.remainingFunCoin?: 0))?.plus(
+                eventDetail?.receiveFunCoin ?: 0
+            )
+            eventDetail?.isUserJoined = true
+            binding.contentBody.tvCoinCirculating.text = coin.toString()
+            eventDetail?.let { checkStateJoin(it) }
+        }
     }
 
     override fun joinEventFail(message: String) {
