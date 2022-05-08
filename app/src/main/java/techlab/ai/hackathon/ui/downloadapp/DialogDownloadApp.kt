@@ -3,6 +3,7 @@ package techlab.ai.hackathon.ui.downloadapp
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -89,13 +90,19 @@ class DialogDownloadApp : DialogFragment(), MultichoiceView {
 
     @SuppressLint("UseRequireInsteadOfGet")
     fun checkIsDownload(uri : String) : Boolean {
-        val pm: PackageManager? = activity?.getPackageManager()
-        try {
-            pm?.getPackageInfo(uri, PackageManager.GET_ACTIVITIES)
-            return true
+        val packages: List<ApplicationInfo> =
+          requireContext(). packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
+
+        return try {
+            packages.forEach {
+                if (it.packageName.contains(uri)){
+                    return true
+                }
+            }
+            return false
         } catch (e: PackageManager.NameNotFoundException) {
+            false
         }
-        return false
     }
 
     override fun joinEventSuccess(message: String) {

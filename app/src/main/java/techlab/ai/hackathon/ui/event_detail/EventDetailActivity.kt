@@ -3,6 +3,7 @@ package techlab.ai.hackathon.ui.event_detail
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,7 @@ import techlab.ai.hackathon.common.coinFormat
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.loadHtml
 import techlab.ai.hackathon.common.openWebUrl
+import techlab.ai.hackathon.common.pushdown.PushDownAnim
 import techlab.ai.hackathon.common.toast.AppToast
 import techlab.ai.hackathon.common.toast.ToastStyle
 import techlab.ai.hackathon.data.model.EventDetail
@@ -38,6 +40,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
+
 
 class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
 
@@ -178,9 +181,16 @@ class EventDetailActivity : BaseActivity(), EventDetailView ,MultichoiceView{
 //        } catch (e: PackageManager.NameNotFoundException) {
 //        }
 //        return false
+        val packages: List<ApplicationInfo> =
+            packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
+
         return try {
-            packageManager.getPackageInfo(packageName, 0)
-            true
+            packages.forEach {
+                if (it.packageName.contains(uri)){
+                    return true
+                }
+            }
+            return false
         } catch (e: PackageManager.NameNotFoundException) {
             false
         }
