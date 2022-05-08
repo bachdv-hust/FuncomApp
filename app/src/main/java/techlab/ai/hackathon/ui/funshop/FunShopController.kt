@@ -25,4 +25,21 @@ class FunShopController(private val funShopView: FunShopView) : BaseController()
                 )
         )
     }
+
+    fun getDonates() {
+        addDisposable(
+            retrofit.getDonates()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        it.data?.let { model ->
+                            funShopView.onResultDonatePackage(model)
+                        }
+                    }, {
+                        it.printStackTrace()
+                    }
+                )
+        )
+    }
 }

@@ -10,23 +10,26 @@ import techlab.ai.hackathon.common.coinFormat
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.loadCorner
 import techlab.ai.hackathon.common.pushdown.PushDownAnim
+import techlab.ai.hackathon.data.model.DonateModel
 import techlab.ai.hackathon.data.model.ShopPackage
+import techlab.ai.hackathon.databinding.ItemFunDonateBinding
 import techlab.ai.hackathon.databinding.ItemFunShopBinding
 
 /**
  * @author BachDV
  */
-class FunShopAdapter : RecyclerView.Adapter<FunShopViewHolder>() {
-    var listData: List<ShopPackage> = arrayListOf()
+class FunDonateAdapter : RecyclerView.Adapter<FunDonateViewHolder>() {
+
+    var listData: List<DonateModel> = arrayListOf()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FunShopViewHolder {
-        return FunShopViewHolder(
-            ItemFunShopBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FunDonateViewHolder {
+        return FunDonateViewHolder(
+            ItemFunDonateBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -34,26 +37,26 @@ class FunShopAdapter : RecyclerView.Adapter<FunShopViewHolder>() {
         )
     }
 
-    override fun onBindViewHolder(holder: FunShopViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FunDonateViewHolder, position: Int) {
         holder.bindData(listData[position])
     }
 
     override fun getItemCount(): Int = listData.size
 }
 
-class FunShopViewHolder(private val binding: ItemFunShopBinding) :
+class FunDonateViewHolder(private val binding: ItemFunDonateBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bindData(item: ShopPackage) {
+    fun bindData(item: DonateModel) {
         binding.ivContent.loadCorner(
-            url = item.thumbnailUrl,
+            url = item.thumbnail_url,
             corner = binding.root.context.resources.getDimensionPixelOffset(
-                R.dimen.dp_8
+                R.dimen.dp_1
             )
         )
         binding.tvTitle.text = item.title?:""
-        binding.tvCoin.text = item.funCoin.coinFormat()
-        PushDownAnim.setPushDownAnimTo(binding.btnJoinNow).setOnClickListener {
-
-        }
+        binding.progressCoin.setMaxProgress(item.total_fun_coin!!)
+        binding.progressCoin.setProgress(item.supported_fun_coins!!)
+        binding.tvCoinCirculating.text = item.supported_fun_coins?.coinFormat()
+        binding.tvCoinTotal.text = item.total_fun_coin?.coinFormat()
     }
 }

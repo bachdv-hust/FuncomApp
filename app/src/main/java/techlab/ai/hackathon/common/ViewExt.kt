@@ -30,6 +30,7 @@ import com.google.gson.Gson
 import io.reactivex.Single
 import techlab.ai.hackathon.R
 import java.io.Serializable
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
@@ -399,4 +400,19 @@ fun String.openWebUrl(context: Context) {
 
     val customTabsIntent = builder.build()
     customTabsIntent.launchUrl(context, Uri.parse(this))
+}
+
+fun Double.coinFormat(): String {
+    val formatter = DecimalFormat("###,###,###")
+    return formatter.format(this)
+}
+
+fun Int.coinFormat(): String {
+    val formatter = DecimalFormat("###,###,###")
+    return formatter.format(this)
+}
+
+fun Float.coinFormat(): String {
+    val formatter = DecimalFormat("###,###,###")
+    return formatter.format(this)
 }

@@ -10,9 +10,13 @@ class MultichoiceController(val multichoiceView: MultichoiceView) : BaseControll
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                       multichoiceView.joinEventSuccess(it.message)
+                if (it.success) {
+                    multichoiceView.joinEventSuccess(it.message)
+                } else {
+                    it.error.message?.let { it1 -> multichoiceView.joinEventFail(it1) }
+                }
             },{
-                it.message?.let { it1 -> multichoiceView.joinEventFail(it1) }
+
             }))
     }
 }

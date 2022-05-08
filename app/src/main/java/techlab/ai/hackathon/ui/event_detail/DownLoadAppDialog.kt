@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.FragmentManager
-import techlab.ai.hackathon.common.pushdown.PushDownAnim
 import techlab.ai.hackathon.databinding.DialogDownLoadAppBinding
 import techlab.ai.hackathon.ui.base.BaseDialogFragment
 

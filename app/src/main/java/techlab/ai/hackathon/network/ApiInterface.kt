@@ -19,10 +19,10 @@ interface ApiInterface {
         @Query("user_id") userId : Long?= null
     ): Observable<BaseListResponse<NewFeed>>
 
-    @GET("events/{eventId}")
+    @GET("events/{event_id}")
     fun getEventDetail(
-        @Path("eventId") eventId: String,
-        @Query("userId") userId: String
+        @Path("event_id") event_id: String,
+        @Query("user_id") user_id: String
     ): Observable<BaseResponse<EventDetail>>
 
     @FormUrlEncoded
@@ -44,6 +44,9 @@ interface ApiInterface {
     fun getComments(
         @Query("event_id") id: Long
     ): Observable<BaseListResponse<CommentModel>>
+
+    @GET("donations")
+    fun getDonates(): Observable<BaseListResponse<DonateModel>>
 
     @FormUrlEncoded
     @POST("events/comments")
