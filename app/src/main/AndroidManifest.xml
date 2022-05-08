@@ -30,6 +30,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.funshop.FunShopActivity"
+            android:theme="@style/Theme.Hackathon.Fill"
             android:exported="false" />
         <activity
             android:name=".ui.persionjoined.PersonJoinedActivity"

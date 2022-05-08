@@ -42,6 +42,9 @@ interface ApiInterface {
         @Query("event_id") id: Long
     ): Observable<BaseListResponse<CommentModel>>
 
+    @GET("donations")
+    fun getDonates(): Observable<BaseListResponse<DonateModel>>
+
     @FormUrlEncoded
     @POST("events/comments")
     fun postComment(

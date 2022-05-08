@@ -121,6 +121,9 @@ class EventDetailActivity : BaseActivity(), EventDetailView {
 
     fun initEvent(eventDetail: EventDetail) {
         binding.btnJoin.setOnClickListener {
+            if(!validateLogin()){
+                return@setOnClickListener
+            }
             if (SharePref.getEventCached(eventDetail.id!!)) {
                 //dang doi xac nhan, xu ly check xem join hay chua
                 SharePref.setEventCached(eventDetail.id!!, false)
