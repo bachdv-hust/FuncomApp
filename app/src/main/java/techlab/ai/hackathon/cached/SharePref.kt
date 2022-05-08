@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import techlab.ai.hackathon.MyApplication
-import techlab.ai.hackathon.data.model.UserModel
 
 /**
  * @author BachDV
@@ -26,12 +25,16 @@ object SharePref {
 
     var userModel: String by SharePrefDelegate(prefs, "userModel", "")
 
-    fun setEventCached(idEvent:Int,wait: Boolean){
-        prefs.edit().putBoolean("event_"+idEvent,wait).apply()
+    var totalCoin: Float by SharePrefDelegate(prefs, "totalCoin", 0f)
+
+    fun setEventCached(idEvent: Int, wait: Boolean) {
+        prefs.edit().putBoolean("event_" + idEvent, wait).apply()
     }
-    fun getEventCached(idEvent:Int):Boolean{
-        return prefs.getBoolean("event_"+idEvent,false)
+
+    fun getEventCached(idEvent: Int): Boolean {
+        return prefs.getBoolean("event_" + idEvent, false)
     }
+
     @SuppressLint("CommitPrefEdits")
     fun clear() {
         prefs.edit().clear().apply()

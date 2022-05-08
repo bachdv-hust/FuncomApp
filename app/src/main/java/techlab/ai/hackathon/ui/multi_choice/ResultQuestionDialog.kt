@@ -1,9 +1,12 @@
 package techlab.ai.hackathon.ui.multi_choice
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import okhttp3.internal.userAgent
@@ -40,6 +43,10 @@ class ResultQuestionDialog() : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.dialog_result_question, container)
+        if (getDialog() != null && getDialog()?.getWindow() != null) {
+            getDialog()?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+            getDialog()?.getWindow()?.requestFeature(Window.FEATURE_NO_TITLE);
+        }
         initView(view)
         return view
     }

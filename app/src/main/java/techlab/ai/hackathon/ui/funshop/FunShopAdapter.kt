@@ -8,6 +8,7 @@ import androidx.viewbinding.ViewBinding
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.loadCorner
+import techlab.ai.hackathon.common.pushdown.PushDownAnim
 import techlab.ai.hackathon.data.model.ShopPackage
 import techlab.ai.hackathon.databinding.ItemFunShopBinding
 
@@ -48,5 +49,10 @@ class FunShopViewHolder(private val binding: ItemFunShopBinding) :
                 R.dimen.dp_8
             )
         )
+        binding.tvTitle.text = item.title?:""
+        binding.tvCoin.text = item.funCoin.toString()
+        PushDownAnim.setPushDownAnimTo(binding.btnJoinNow).setOnClickListener {
+
+        }
     }
 }

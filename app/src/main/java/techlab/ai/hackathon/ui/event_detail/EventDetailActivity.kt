@@ -6,31 +6,30 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.cached.SharePref
 import techlab.ai.hackathon.common.load
 import techlab.ai.hackathon.common.loadHtml
 import techlab.ai.hackathon.common.openWebUrl
+import techlab.ai.hackathon.common.pushdown.PushDownAnim
+import techlab.ai.hackathon.common.toast.AppToast
+import techlab.ai.hackathon.common.toast.ToastStyle
 import techlab.ai.hackathon.data.model.EventDetail
 import techlab.ai.hackathon.databinding.*
 import techlab.ai.hackathon.share_ui.avatagen.AvatarGenerator
+import techlab.ai.hackathon.ui.base.BaseActivity
 import techlab.ai.hackathon.ui.comment.CommentActivity
 import techlab.ai.hackathon.ui.login.LoginDialog
-import techlab.ai.hackathon.ui.manager.LoginChangedListener
 import techlab.ai.hackathon.ui.multi_choice.MultiChoiceActivity
 import techlab.ai.hackathon.ui.persionjoined.PersonJoinedActivity
 import techlab.ai.hackathon.ui.view_descript.ViewDescriptionActivity
 import kotlin.math.abs
 
-class EventDetailActivity : AppCompatActivity(), EventDetailView, LoginChangedListener {
+class EventDetailActivity : BaseActivity(), EventDetailView {
 
     companion object {
         fun startActivity(context: Context, eventId: String, userId: String) {
@@ -46,10 +45,13 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView, LoginChangedLi
         EventDetailController(this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
+    override fun initBindingView(): View {
         binding = ActivityEventDetailBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun afterCreatedView() {
         setContentView(binding.root)
 
         setSupportActionBar(findViewById(R.id.toolbar))
@@ -58,8 +60,8 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView, LoginChangedLi
             // Apply the insets as padding to the view. Here we're setting all of the
             // dimensions, but apply as appropriate to your layout. You could also
             // update the views margin if more appropriate.
-            Log.d("insets.top=",insets.top.toString())
-            val params =  binding.toolbar.layoutParams as FrameLayout.LayoutParams
+            Log.d("insets.top=", insets.top.toString())
+            val params = binding.toolbar.layoutParams as FrameLayout.LayoutParams
             params.setMargins(0, insets.top, 0, 0)
             binding.toolbar.layoutParams = params
             // Return CONSUMED if we don't want the window insets to keep being passed
@@ -93,29 +95,42 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView, LoginChangedLi
             startActivity(shareIntent)
         }
         binding.btnComment.setOnClickListener {
-            CommentActivity.startSelf(this, eventId?.toLong() ?: -1)
+            if (validateLogin()) {
+                CommentActivity.startSelf(this, eventId?.toLong() ?: -1)
+            }
         }
-
+        PushDownAnim.setPushDownAnimTo(binding.contentBody.ctnDownload).setOnClickListener {
+            val dialog = DownLoadAppDialog.show(supportFragmentManager)
+            dialog.callBack = object : DownloadDialogCallBack {
+                override fun oncClickDownLoadBtn() {
+                    // TODO
+                }
+            }
+        }
         eventId?.let { userId?.let { it1 -> eventController.getEventDetail(it, it1) } }
+    }
 
+    private fun validateLogin(): Boolean {
+        return if (SharePref.isLogin) {
+            true
+        } else {
+            LoginDialog.show(supportFragmentManager)
+            false
+        }
     }
 
     fun initEvent(eventDetail: EventDetail) {
         binding.btnJoin.setOnClickListener {
-            if (!SharePref.isLogin) {
-                LoginDialog.show(supportFragmentManager)
-                return@setOnClickListener
-            }
             if (SharePref.getEventCached(eventDetail.id!!)) {
                 //dang doi xac nhan, xu ly check xem join hay chua
                 SharePref.setEventCached(eventDetail.id!!, false)
                 checkStateJoin(eventDetail)
             } else {
                 //tham gia
-                if (eventDetail.type==1) {
-                    var intent = Intent(this,MultiChoiceActivity::class.java)
+                if (eventDetail.type == 1) {
+                    var intent = Intent(this, MultiChoiceActivity::class.java)
                     var bundle = Bundle()
-                    bundle.putSerializable("data",eventDetail)
+                    bundle.putSerializable("data", eventDetail)
                     intent.putExtras(bundle)
                     startActivity(intent)
                 }
@@ -136,7 +151,7 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView, LoginChangedLi
             binding.contentBody.tvEventTitle.text = eventDetail.title
             eventDetail.createdBy?.let {
                 binding.contentBody.tvCreateBy.text = "Tạo bởi ${it.username}"
-            }?: kotlin.run {
+            } ?: kotlin.run {
                 binding.contentBody.tvCreateBy.visibility = View.GONE
             }
 
@@ -156,6 +171,9 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView, LoginChangedLi
                 ViewDescriptionActivity.startActivity(this, eventDetail.description!!)
             }
             binding.contentBody.headerUserJoin.setOnClickListener {
+                PersonJoinedActivity.startActivity(this, eventDetail)
+            }
+            binding.contentBody.tvViewMoreUserJoin.setOnClickListener {
                 PersonJoinedActivity.startActivity(this, eventDetail)
             }
             binding.contentBody.tvCoinCirculating.text = receiveFunCoin.toString()
@@ -191,7 +209,9 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView, LoginChangedLi
             //da tham gia
             if (!eventDetail.userJoined.isNullOrEmpty()) {
                 binding.contentBody.headerUserJoin.setText("${eventDetail.userJoined.size} người đã tham gia")
+                var count = 0;
                 for (user in eventDetail.userJoined) {
+                    if (count >= 3) break
                     val viewUsers =
                         LayoutInflater.from(this)
                             .inflate(
@@ -213,6 +233,7 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView, LoginChangedLi
                     vUsers.tvUserName.text = user.user?.nameDisplay()
                     vUsers.tvCoin.text = "+${user.coin}"
                     binding.contentBody.llUsersJoin.addView(viewUsers)
+                    count++
                 }
             } else {
                 binding.contentBody.llUsersJoin.visibility = View.GONE
@@ -253,7 +274,12 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView, LoginChangedLi
         } catch (e: Exception) {
             e.printStackTrace()
         }
+        hideDialog()
+    }
 
+    override fun loadEventFail() {
+        hideDialog()
+        AppToast.createToast(ToastStyle.ERROR).setText("Có lỗi xảy ra!").show(this)
     }
 
     private fun checkStateJoin(eventDetail: EventDetail) {
@@ -270,10 +296,6 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView, LoginChangedLi
             }
         }
 
-
-    }
-
-    override fun onLoginChanged(isLogged: Boolean) {
 
     }
 }

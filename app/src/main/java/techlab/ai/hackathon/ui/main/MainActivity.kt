@@ -16,15 +16,15 @@ import techlab.ai.hackathon.common.toast.ToastStyle
 import techlab.ai.hackathon.data.model.NewFeed
 import techlab.ai.hackathon.data.model.UserModel
 import techlab.ai.hackathon.databinding.ActivityMainBinding
+import techlab.ai.hackathon.share_ui.avatagen.AvatarGenerator
 import techlab.ai.hackathon.ui.base.BaseActivity
 import techlab.ai.hackathon.ui.funshop.FunShopActivity
 import techlab.ai.hackathon.ui.login.LoginDialog
 import techlab.ai.hackathon.ui.main.adapter.NewFeedAdapter
-import techlab.ai.hackathon.ui.manager.AppLoginManager
-import techlab.ai.hackathon.ui.manager.LoginChangedListener
+import techlab.ai.hackathon.ui.manager.*
 import techlab.ai.hackathon.ui.profile.ProfileActivity
 
-class MainActivity : BaseActivity(), MainView, LoginChangedListener {
+class MainActivity : BaseActivity(), MainView, LoginChangedListener , CoinChangeListener {
 
     companion object {
         @JvmStatic
@@ -49,6 +49,7 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener {
     override fun afterCreatedView() {
         mainController = MainController(this)
         AppLoginManager.addListener(this)
+        AppCoinManager.addListener(this)
         newFeedAdapter = NewFeedAdapter()
         binding.rvList.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -56,10 +57,8 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener {
         }
 
         binding.ivAvatar.setOnClickListener {
-            if (SharePref.isLogin) {
+            if (validateLogin()){
                 ProfileActivity.startSelf(this)
-            } else {
-                LoginDialog.show(supportFragmentManager)
             }
         }
         binding.refreshLayout.setOnRefreshListener {
@@ -70,11 +69,47 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener {
         }
 
         PushDownAnim.setPushDownAnimTo(binding.btnFunShop).setOnClickListener {
-            FunShopActivity.startSelf(this)
+            if (validateLogin()){
+                FunShopActivity.startSelf(this)
+            }
         }
         // Call Api
         showDialog()
+        updateUI()
         onRefresh()
+    }
+    private fun validateLogin() : Boolean{
+        return if (SharePref.isLogin){
+            true
+        }else{
+            LoginDialog.show(supportFragmentManager)
+            false
+        }
+    }
+
+    private fun updateUI() {
+        val userString = SharePref.userModel
+        if (userString.isNotEmpty() && SharePref.isLogin) {
+            val user = Gson().fromJson(userString, UserModel::class.java)
+            user.avatar?.let {
+                binding.ivAvatar.load(url = it, placeholder = R.drawable.ic_logo_funtap)
+            }?: kotlin.run {
+                val av = AvatarGenerator.AvatarBuilder(this)
+                    .setLabel(user?.lastName ?: "")
+                    .setAvatarSize(120)
+                    .setTextSize(30)
+                    .toSquare()
+                    .toCircle()
+                    .build()
+                binding.ivAvatar.setImageDrawable(
+                    av
+                )
+            }
+
+        } else {
+            binding.ivAvatar.load(url = "", placeholder = R.drawable.ic_logo_funtap)
+        }
+        binding.tvTotalCoin.text = CoinUtil.getCurrentCoin().toString()
     }
 
     private fun onRefresh() {
@@ -85,6 +120,7 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener {
         super.onDestroy()
         mainController.clear()
         AppLoginManager.removeListener(this)
+        AppCoinManager.removeListener(this)
     }
 
     override fun onNewFeedsResult(newFeeds: List<NewFeed>) {
@@ -98,15 +134,12 @@ class MainActivity : BaseActivity(), MainView, LoginChangedListener {
     }
 
     override fun onLoginChanged(isLogged: Boolean) {
-        if (isLogged) {
-            val user = Gson().fromJson(SharePref.userModel, UserModel::class.java)
-            binding.ivAvatar.load(url = user.avatar, placeholder = R.drawable.ic_logo_funtap)
-            binding.tvTotalCoin.text = user.totalCoin.toInt().toString()
-        } else {
-            binding.ivAvatar.load(url = "", placeholder = R.drawable.ic_logo_funtap)
-            binding.tvTotalCoin.text = "0"
-        }
+        updateUI()
         onRefresh()
+    }
+
+    override fun onChange(totalCoin: Float) {
+        binding.tvTotalCoin.text = totalCoin.toString()
     }
 
 

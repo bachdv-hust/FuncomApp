@@ -39,6 +39,7 @@ class CommentController (private val commentView : CommentView): BaseController(
                         }
                     }, {
                         it.printStackTrace()
+                        commentView.commentFail()
                     }
                 )
         )

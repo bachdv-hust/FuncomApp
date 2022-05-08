@@ -15,11 +15,11 @@ class PersonJoinedActivity : BaseActivity() {
 
     companion object {
         fun startActivity(context: Context, eventDetail: EventDetail?) {
-            val intent = Intent(context, PersonJoinedActivity::class.java)
             eventDetail?.let {
+                val intent = Intent(context, PersonJoinedActivity::class.java)
                 intent.putExtra("eventDetail", Gson().toJson(it))
+                context.startActivity(intent)
             }
-            context.startActivity(intent)
         }
     }
 
@@ -46,16 +46,17 @@ class PersonJoinedActivity : BaseActivity() {
             eventDetail?.userJoined?.let {
                 personJoinedAdapter.listData = it
             }
-            val receiveFunCoin = eventDetail.receiveFunCoin ?: 0
+
+            val remainingFunCoin = eventDetail.remainingFunCoin ?: 0
             val totalFunCoin = eventDetail.totalFunCoin ?: 0
-            if (totalFunCoin >= 0) {
+            if (totalFunCoin <= 0) {
                 binding.progressCoin.setProgress(0)
             } else {
-                val percentRemain = (receiveFunCoin / totalFunCoin) * 100
-                binding.progressCoin.setProgress(receiveFunCoin)
+                val percentRemain = (remainingFunCoin / totalFunCoin) * 100
                 binding.progressCoin.setMaxProgress(totalFunCoin)
+                binding.progressCoin.setProgress(remainingFunCoin)
             }
-            binding.tvCoinCirculating.text = receiveFunCoin.toString()
+            binding.tvCoinCirculating.text = remainingFunCoin.toString()
             binding.tvCoinTotal.text = totalFunCoin.toString()
         }
     }

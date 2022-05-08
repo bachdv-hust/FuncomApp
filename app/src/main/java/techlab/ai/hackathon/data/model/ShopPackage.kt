@@ -10,6 +10,9 @@ class ShopPackage {
     @SerializedName("id")
     var id: Long = 0
 
+    @SerializedName("fun_coin")
+    var funCoin: Double = 0.0
+
     @SerializedName("title")
     var title: String? = null
 

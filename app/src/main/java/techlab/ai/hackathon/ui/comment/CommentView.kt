@@ -9,4 +9,5 @@ interface CommentView {
     fun onCommentResult(comments : List<CommentModel>)
     fun onFail()
     fun commentSuccess()
+    fun commentFail()
 }

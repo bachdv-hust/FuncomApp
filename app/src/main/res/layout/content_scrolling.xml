@@ -329,6 +329,7 @@ với những khoản vay phù hợp với mọi nhu cầu. Và
                 app:text="150 người đã tham gia" />
 
             <TextView
+                android:id="@+id/tvViewMoreUserJoin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
