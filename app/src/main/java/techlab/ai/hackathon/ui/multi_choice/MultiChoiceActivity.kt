@@ -99,17 +99,18 @@ class MultiChoiceActivity : BaseActivity() {
     fun resetChoice(questionData: QuestionData,position : Int) : List<QuestionData>?{
         listQuestionData?.forEachIndexed { index, qt ->
             if (qt.idAnswer == questionData.idAnswer) {
-                if (index != position) {
+                if (index != position && questionData.isCheck) {
                     qt.isCheck = false
+                    adapter.notifyItemChanged(index,"reset")
                 }
             }
         }
-        rcv?.post(object : Runnable{
-            override fun run() {
-                listQuestionData?.let { adapter.setResult(it) }
-            }
-
-        })
+//        rcv?.post(object : Runnable{
+//            override fun run() {
+//                listQuestionData?.let { adapter.setResult(it) }
+//            }
+//
+//        })
         return listQuestionData
     }
 

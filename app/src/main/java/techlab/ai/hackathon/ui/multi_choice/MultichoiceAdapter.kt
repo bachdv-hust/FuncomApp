@@ -35,6 +35,25 @@ class MultichoiceAdapter(val listener: OnQuestionClick) :
         }
     }
 
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isNotEmpty()) {
+            val context = holder.itemView.context
+            if (payloads[0] == "reset") {
+                if (holder is AnwserViewHolder) {
+                    holder.cbt_anwser.setImageDrawable(context.resources.getDrawable(R.drawable.questionselectionunselected))
+                    holder.txt_anwser.setTextColor(context.resources.getColor(R.color.Base_B500))
+                }
+            }
+        } else {
+            super.onBindViewHolder(holder, position, payloads)
+        }
+
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val context = holder.itemView.context
         if (holder is QuestionViewHolder) {
