@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import techlab.ai.hackathon.common.coinFormat
 import techlab.ai.hackathon.data.model.EventDetail
 import techlab.ai.hackathon.data.model.UserJoin
 import techlab.ai.hackathon.databinding.ActivityPersonJoinedBinding
@@ -56,8 +57,8 @@ class PersonJoinedActivity : BaseActivity() {
                 binding.progressCoin.setMaxProgress(totalFunCoin)
                 binding.progressCoin.setProgress(totalFunCoin - remainingFunCoin)
             }
-            binding.tvCoinCirculating.text = (totalFunCoin - remainingFunCoin).toString()
-            binding.tvCoinTotal.text = totalFunCoin.toString()
+            binding.tvCoinCirculating.text = (totalFunCoin - remainingFunCoin).coinFormat()
+            binding.tvCoinTotal.text = totalFunCoin.coinFormat()
         }
     }
 }
