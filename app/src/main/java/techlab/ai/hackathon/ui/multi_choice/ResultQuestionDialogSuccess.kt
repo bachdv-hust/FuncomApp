@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
+import com.airbnb.lottie.utils.Utils
 import okhttp3.internal.userAgent
 import techlab.ai.hackathon.R
 import techlab.ai.hackathon.data.model.ResultQuestionModle
+import techlab.ai.hackathon.ui.manager.CoinUtil
 
 class ResultQuestionDialogSuccess() : DialogFragment() {
     var tv_coin : TextView? = null
@@ -54,6 +56,7 @@ class ResultQuestionDialogSuccess() : DialogFragment() {
         btn_give = view.findViewById(R.id.btn_give_coin)
         tv_coin?.text = score.toString() + "Funcoin"
         btn_give?.setOnClickListener {
+            CoinUtil.updateCoin(score.toFloat())
             activity?.finish()
         }
     }
